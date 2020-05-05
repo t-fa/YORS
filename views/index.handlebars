@@ -1,0 +1,120 @@
+<!-- Authors: Janet Anderson and Thomas Fattah -->
+<!-- Step: 3 Draft -->
+<!-- Date: May 2, 2020 -->
+<!-- Course: CS 340 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ye Olde Robot Shoppe Customers</title>
+    <link rel="stylesheet" href="style.css" type="text/css" />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <div class="NaviBar">
+      <a class="active" href="index.html">Customers</a>
+      <a href="orders.html">Orders</a>
+      <a href="items.html">Items</a>
+      <a href="purchases.html">Purchases</a>
+      <a href="suppliers.html">Suppliers</a>
+    </div>
+
+    <section>
+      <br />
+      This page will display the Customers entity table. (Below is a mock
+      version of what the SQL SELECT query will display.) This page will also
+      allow for a customer to be added.
+      <br />
+      <br />
+    </section>
+    <!-- Mock SQL query and CRUD functions for the orders Entity-->
+    <h1>Current Customers:</h1>
+    <section class="Table">
+      <table>
+        <thread>
+          <tr>
+            <th>customerID</th>
+            <th>customerFirstName</th>
+            <th>customerLastName</th>
+            <th>customerPlanet</th>
+          </tr>
+        </thread>
+        <tbody class="table_body">
+          <tr>
+            <td>1</td>
+            <td>Bob</td>
+            <td>Saget</td>
+            <td>Earth</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Kanye</td>
+            <td>West</td>
+            <td>Jupiter</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>VR</td>
+            <td>2103</td>
+            <td>Ergotron V</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>CRK</td>
+            <td>42</td>
+            <td>Machina</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>PR</td>
+            <td>007</td>
+            <td>Chin Thum</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <br />
+    <h1>Add a new customer:</h1>
+    <section>
+      <form>
+        <fieldset>
+          <label>
+            Enter First Name:
+            <input
+              id="customerFirstName"
+              type="text"
+              name="customerFirstName"
+              size="40"
+              maxlength="255"
+            />
+          </label>
+          <br />
+          <label>
+            Enter Last Name:
+            <input
+              id="customerLastName"
+              type="text"
+              name="customerLastName"
+              size="40"
+              maxlength="255"
+            />
+          </label>
+          <br />
+          <label>
+            Enter Planet:
+            <input
+              id="customerPlanet"
+              type="text"
+              name="customerPlanet"
+              size="40"
+              maxlength="255"
+            />
+          </label>
+          <br />
+          <input type="submit" id="submit" value="Add Customer" />
+        </fieldset>
+      </form>
+    </section>
+  </body>
+</html>

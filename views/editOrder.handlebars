@@ -1,0 +1,52 @@
+<!-- Authors: Janet Anderson and Thomas Fattah -->
+<!-- Step: 3 Draft -->
+<!-- Date: May 2, 2020 -->
+<!-- Course: CS 340 -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <title>Ye Olde Robot Shoppe Orders</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    </head>
+    <body>
+
+        <h1>Edit An Order</h1>
+
+        This page allows the user to update an order based on the customerID, orderDate, galaticPay, and orderBeamed.
+        The user can then update the order, or cancel and go back to the orders HTML page.  (Note: Clicking the update button does not 
+        currently do anything, but the cancel button will return you to the orders HTML page).
+        <br>
+        <br>
+          
+
+        <!-- This form will submit to the GET route update, and will display the current values,
+            allowing the user to pick what entries they'd like to update -->
+        <form>
+            <fieldset>
+                <label>
+                    Edit customerID:
+                <input id="customerID" type="number" name="customerID" size="40" min="1" max="4">
+                </label>
+                <br>
+                <label>
+                    Edit orderDate:
+                    <input id ="orderDate" type="date" name="orderDate" size="40" min = "2020-01-01" max = "2020-12-31">
+                </label>
+                <br>
+                <label>
+                    Edit galacticPay:
+                    <input id ="galacticPay" type="text" inputmode="numeric" patter="[0-9]*" name="galaticPay" size="40" maxlength="20" minlength="20">
+                </label>
+                <br>
+                Please click on the correct value for orderBeamed:
+                    <input id="orderBeamed_true" type="radio" name="orderBeamed_true" value="1" />Yes</label>
+                    <input id="orderBeamed_false" type="radio" name="orderedBeamed_false" value="0" />No</label>  
+                <br>
+                <br>  
+                <input type="submit" id="submit" value = "Update Order">
+                <input type="button" value="Cancel" onClick="location.href='orders.html'"></button>
+            </fieldset>
+        </form>
+    </body>
+</html>

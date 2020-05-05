@@ -1,0 +1,26 @@
+{
+  "name": "yors",
+  "version": "1.0.0",
+  "description": "Ye Olde Robot Shoppe",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/t-fa/YORS.git"
+  },
+  "author": "Thomas Fattah/Janet Anderson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/t-fa/YORS/issues"
+  },
+  "homepage": "https://github.com/t-fa/YORS#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "bootstrap": "^4.4.1",
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.4",
+    "mysql": "^2.18.1"
+  }
+}
