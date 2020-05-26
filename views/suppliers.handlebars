@@ -8,16 +8,16 @@
 
 <!-- Mock SQL query and CRUD functions for the orders Entity-->
 <h1>Current Suppliers:</h1>
-<section class="Table">
-    <table>
-        <thread>
+<section>
+    <table class="table table-striped">
+        <thead class="thead-dark">
             <tr>
                 <th>supplierID</th>
                 <th>supplierName</th>
                 <th>supplierPlanet</th>
             </tr>
-        </thread>
-        <tbody class="table_body">
+        </thead>
+        <tbody>
             <tr>
                 <td>1</td>
                 <td>Robot Renovators</td>
@@ -47,27 +47,17 @@
     </table>
 </section>
 
-<br />
 <h1>Add a new supplier:</h1>
 <section>
     <form>
-        <p class="form">
-            <label for="supplierName">
-                Enter Supplier Name:
+        <div class="form-group">
+            <label>Enter Supplier Name:
+                <input class="form-control" type="text" name="supplierName" size="40" maxlength="255" />
             </label>
-            <input id="supplierName" type="text" name="supplierName" size="40" maxlength="255" />
-        </p>
-        <br />
-        <p class="form">
-            <label for="supplierPlanet">
-                Enter Supplier Planet:
+            <label>Enter Supplier Planet:
+                <input class="form-control" type="text" name="supplierPlanet" size="40" maxlength="255" />
             </label>
-            <input id="supplierPlanet" type="text" name="supplierPlanet" size="40" maxlength="255" />
-        </p>
-        <br />
-        <input type="submit" id="submit" value="Add Supplier" />
-        </fieldset>
+            <input type="submit" class="btn btn-primary" value="Add Supplier" />
+        </div>
     </form>
 </section>
-
-<!-- <script src="./.js"></script> -->

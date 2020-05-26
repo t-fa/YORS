@@ -7,16 +7,16 @@
 
 <!-- Mock SQL query and CRUD functions for the orders Entity-->
 <h1>Current Purchases:</h1>
-<section class="Table">
-    <table>
-        <thread>
+<section>
+    <table class="table table-striped">
+        <thead class="thead-dark">
             <tr>
                 <th>purchaseID</th>
                 <th>purchaseDate</th>
                 <th>customerID</th>
             </tr>
-        </thread>
-        <tbody class="table_body">
+        </thead>
+        <tbody>
             <tr>
                 <td>1</td>
                 <td>2020-01-20</td>
@@ -46,26 +46,17 @@
     </table>
 </section>
 
-<br />
 <h1>Add a new purchase:</h1>
 <section>
     <form>
-        <p class="form">
-            <label for="customerID">
-                Enter customerID:
+        <div class="form-group">
+            <label for="customerID">Enter customerID:
+                <input class="form-control" type="number" name="customerID" size="40" min="1" />
             </label>
-            <input id="customerID" type="number" name="customerID" size="40" min="1" />
-        </p>
-        <br />
-        <p class="form">
-            <label for="purchaseDate">
-                Enter Date of Purchase:
+            <label>Enter Date of Purchase:
+                <input class="form-control" type="date" name="purchaseDate" size="40" />
             </label>
-            <input class="date" id="purchaseDate" type="date" name="purchaseDate" size="40" />
-        </p>
-        <br />
-        <input type="submit" id="submit" value="Add Purchase" />
+            <input type="submit" class="btn btn-primary" value="Add Purchase" />
+        </div>
     </form>
 </section>
-
-<!-- <script src="./.js"></script> -->

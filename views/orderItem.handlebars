@@ -8,16 +8,16 @@
 
 <!-- Mock SQL query and CRUD functions for the orders Entity-->
 <h1>Current Order Numbers and Items:</h1>
-<section class="Table">
-    <table>
-        <thread>
+<section>
+    <table class="table table-striped">
+        <thead class="thead-dark">
             <tr>
                 <th>orderID</th>
                 <th>itemID</th>
                 <th>quantity</th>
             </tr>
-        </thread>
-        <tbody class="table_body">
+        </thead>
+        <tbody>
             <tr>
                 <td>1001</td>
                 <td>001</td>
@@ -52,23 +52,17 @@
 <h1>Add an item to an order:</h1>
 <section>
     <form>
-        <p class="form">
-            <label for="orderID">Enter orderID:</label>
-            <input id="orderID" type="number" name="OrderID" size="40" min="1">
-        </p>
-        <br>
-        <p class="form">
-            <label for="itemID">Enter itemID:</label>
-            <input id="itemID" type="number" name="itemID" size="40" min="1">
-        </p>
-        <br>
-        <p class="form">
-            <label for="quantity">Enter quantity:</label>
-            <input id="quanity" type="number" name="quantity" size="40" min="1">
-        </p>
-        <br>
+        <div class="form-group">
+            <label>Enter orderID:
+                <input class="form-control" type="number" name="OrderID" size="40" min="1">
+            </label>
+            <label>Enter itemID:
+                <input class="form-control" type="number" name="itemID" size="40" min="1">
+            </label>
+            <label>Enter quantity:
+                <input class="form-control" type="number" name="quantity" size="40" min="1">
+            </label>
+        </div>
     </form>
-    <input type="submit" id="submit" value="Add Item to Order">
+    <input type="submit" class="btn btn-primary" value="Add Item to Order">
 </section>
-
-<!-- <script src="./.js"></script> -->
