@@ -1,0 +1,103 @@
+body
+{
+    /* width: 1000px; */
+    background-color: rgba(210, 180, 140,0.7);
+    font-family: Verdana, sans-serif;
+}
+
+/*  Styling for the Navigation Bar (horizontal menu) at the top of the page
+    Used https://www.w3schools.com/css/css_navbar.asp as a reference for how to create */
+.NaviBar
+{
+    width: 100%;          
+    overflow: auto;
+    background-color: #9e9d9d;
+}
+
+.NaviBar a 
+{
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 12px 14px;
+    text-decoration: none;
+    width: 8%;
+    text-align: center;
+  }
+  
+.NaviBar a:hover:not(.active) 
+{
+    background-color: #535252;
+}
+  
+.active 
+{
+    background-color: #008CBA;
+}
+
+/* Styling for images */
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+ }
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Styling for paragraph */
+p{
+    max-width: 800px;
+}
+
+/*  Styling for the mock up SQL query table */
+table{
+    border-collapse: collapse;
+}
+
+th, td {
+    padding:0 15px;
+    text-align: left;
+}
+
+.table_body tr:nth-of-type(odd) {
+    background-color: rgba(175, 172, 172, 0.562);
+}
+
+.table_body tr:nth-of-type(even) {
+    background-color: rgba(99, 99, 100, 0.562)
+}
+
+#searchBox {
+    width: 25%; 
+    background-color: rgba(245, 239, 239, 0.562);
+    font-size: 12px;
+    padding: 5px 0px 5px 10px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+  }
+
+/* Styling for forms */
+form  { 
+    display: table;      
+}
+
+p.form { 
+    display: table-row;  
+}
+
+label { 
+    display: table-cell; 
+}
+
+input { 
+    display: table-cell; 
+}
+
+input.date{
+    width:168px;
+}

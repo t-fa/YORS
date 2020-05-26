@@ -1,0 +1,127 @@
+<!-- Authors: Janet Anderson and Thomas Fattah -->
+<!-- Step: 5 Draft -->
+<!-- Date: May 25, 2020 -->
+<!-- Course: CS 340 -->
+
+<!-- Title -->
+<title>Ye Olde Robot Shoppe Customers</title>
+
+
+<!-- Navigation Bar -->
+<div class="NaviBar">
+    <a href="/">Home</a>
+    <a class="active" href="customers">Customers</a>
+    <a href="orders">Orders</a>
+    <a href="items">Items</a>
+    <a href="orderItem">OrderItem</a>
+    <a href="purchases">Purchases</a>
+    <a href="suppliers">Suppliers</a>
+</div>
+
+<!-- Mock SQL query and CRUD functions for the orders Entity-->
+<h1>Current Customers:</h1>
+<div>
+    View Selected Customers
+    <br />
+    <input type="text" id="searchBox" placeholder="Search for names..">
+    or 
+    <select id="filteringOptions">
+        <option>Earth</option>
+        <option>Jupiter</option>
+        <option>Ergotron V</option>
+        <option>Machina</option>
+    </select>
+</div>
+<section class="Table" id="customerTable">
+<table>
+    <thread>
+    <tr>
+        <th>customerID</th>
+        <th>customerFirstName</th>
+        <th>customerLastName</th>
+        <th>customerPlanet</th>
+    </tr>
+    </thread>
+    <tbody class="table_body">
+    <tr>
+        <td>1</td>
+        <td>Bob</td>
+        <td>Saget</td>
+        <td>Earth</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Kanye</td>
+        <td>West</td>
+        <td>Jupiter</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>VR</td>
+        <td>2103</td>
+        <td>Ergotron V</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>CRK</td>
+        <td>42</td>
+        <td>Machina</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>PR</td>
+        <td>007</td>
+        <td>Chin Thum</td>
+    </tr>
+    </tbody>
+</table>
+</section>
+
+<br />
+<h1>Add a new customer:</h1>
+<section>
+<form>
+    <p class="form">
+    <label for="customerFirstName">
+        Enter First Name:
+    </label>
+        <input
+        id="customerFirstName"
+        type="text"
+        name="customerFirstName"
+        size="40"
+        maxlength="255"
+        />
+    </p>
+    <br />
+    <p class="form">
+    <label for="customerLastName">
+        Enter Last Name: 
+    </label>
+        <input
+        id="customerLastName"
+        type="text"
+        name="customerLastName"
+        size="40"
+        maxlength="255"
+        />
+    </p>
+    <br />
+    <p class="form">
+    <label for="customerPlanet">
+        Enter Planet:
+    </label>
+        <input
+        id="customerPlanet"
+        type="text"
+        name="customerPlanet"
+        size="40"
+        maxlength="255"
+        />
+    </p>
+    <br />
+    <input type="submit" id="submit" value="Add Customer" />
+</form>
+</section>
+
+<!-- <script src="./.js"></script> -->

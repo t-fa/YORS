@@ -1,120 +1,100 @@
 <!-- Authors: Janet Anderson and Thomas Fattah -->
-<!-- Step: 3 Draft -->
-<!-- Date: May 2, 2020 -->
+<!-- Step: 5 Draft -->
+<!-- Date: May 25, 2020 -->
 <!-- Course: CS 340 -->
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-    <meta charset="utf-8">
-    <title>Ye Olde Robot Shoppe Items</title>
-    <link rel="stylesheet" href="style.css" type="text/css">
-    </head>
-    <body>
-        <!-- Navigation Bar -->
-        <div class="NaviBar">
-            <a href="index.html">Customers</a>
-            <a href="orders.html">Orders</a>
-            <a class="active" href="items.html">Items</a>
-            <a href="purchases.html">Purchases</a>
-            <a href="suppliers.html">Suppliers</a>
-        </div>
-        <section>
-            <br>
-            This page will display the Items entity table.  (Below is a mock version of what the SQL SELECT call will display.)
-            This page will also allow for an item to be added.  This page will also display a join of the orders, and items to 
-            display orders with items listed.  The functionality of being able to search/filter will be implemented.
-            <br>
-            <br>
-               
-        </section>
-        <!-- Mock SQL query and CRUD functions for the orders Entity-->
-        <h1>Current Items:</h1>
-        <section class="Table">
-            <table>
-                <thread>
-                    <tr>
-                        <th>itemID</th>
-                        <th>itemType</th>
-                        <th>supplierID</th>
-                        <th>YeOldePrice</th>
-                        <th>currentQuantity</th>
-                    </tr>
-                </thread>
-                <tbody class="table_body">
-                    <tr>
-                        <td>001</td>
-                        <td>Processor</td>
-                        <td>002</td>
-                        <td>750.99</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>002</td>
-                        <td>RAM</td>
-                        <td>005</td>
-                        <td>250.99</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td>003</td>
-                        <td>SSD</td>
-                        <td>002</td>
-                        <td>169.99</td>
-                        <td>4</td>
-                    </tr>
-                    <tr>
-                        <td>004</td>
-                        <td>External Hard Drive</td>
-                        <td>003</td>
-                        <td>59.99</td>
-                        <td>7</td>
-                    </tr>
-                    <tr>
-                        <td>005</td>
-                        <td>Motherboard</td>
-                        <td>001</td>
-                        <td>119.99</td>
-                        <td>1</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
 
+<title>Ye Olde Robot Shoppe Items</title>
+
+<!-- Navigation Bar -->
+<div class="NaviBar">
+    <a href="/">Home</a>
+    <a href="customers">Customers</a>
+    <a href="orders">Orders</a>
+    <a class="active" href="items">Items</a>
+    <a href="orderItem">OrderItem</a>
+    <a href="purchases">Purchases</a>
+    <a href="suppliers">Suppliers</a>
+</div>
+
+<!-- Mock SQL query and CRUD functions for the orders Entity-->
+<h1>Current Items:</h1>
+<section class="Table">
+    <table>
+        <thread>
+            <tr>
+                <th>itemID</th>
+                <th>itemType</th>
+                <th>supplierID</th>
+                <th>YeOldePrice</th>
+                <th>currentQuantity</th>
+            </tr>
+        </thread>
+        <tbody class="table_body">
+            <tr>
+                <td>001</td>
+                <td>Processor</td>
+                <td>002</td>
+                <td>750.99</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>002</td>
+                <td>RAM</td>
+                <td>005</td>
+                <td>250.99</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>003</td>
+                <td>SSD</td>
+                <td>002</td>
+                <td>169.99</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>004</td>
+                <td>External Hard Drive</td>
+                <td>003</td>
+                <td>59.99</td>
+                <td>7</td>
+            </tr>
+            <tr>
+                <td>005</td>
+                <td>Motherboard</td>
+                <td>001</td>
+                <td>119.99</td>
+                <td>1</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<br>
+<h1>Add an item:</h1>
+<section>
+    <form>
+        <p class="form">
+            <label for="itemType">Enter itemType:</label>
+            <input id="itemType" type="text" name="itemType">
+        </p>
         <br>
-        <h1>Add an item:</h1>
-        <section>
-            <form>
-                <fieldset>
-                    <label>
-                        Enter itemType:
-                    <input id="itemType" type="text" name="itemType" size="40" maxlength="255">
-                    </label>
-                    <br>
-                    <label>
-                        Enter supplierName:
-                    <input id="supplierName" type="text" name="supplierName" size="40" maxlength="255">
-                    </label>
-                    <br>
-                    <label>
-                        Enter supplierPlanet:
-                    <input id="supplierPlanet" type="text" name="supplierPlanet" size="40" maxlength="255">
-                    </label>
-                    <br>
-                    <label>
-                        Enter YeOldePrice:
-                        <input id ="price" type="number" step="0.01" min=0 size="40">
-                    </label>
-                    <br>
-                    <label>
-                        Enter currentQuantity:
-                        <input id ="currentQuantity" type="number" name="currentQuantity" size="40" min = 0>
-                    </label>
-                    <br>
-                    <br>  
-                    <input type="submit" id="submit" value = "Add Item">
-                </fieldset>
-            </form>
-        </section>
+        <p class="form">
+            <label for="supplierID">Enter supplierID: (optional)</label>
+            <input id="supplierName" type="number" name="supplierName" size="40" min = "1">
+        </p>
+        <br>
+        <p class="form">
+            <label for="price">Enter YeOldePrice:</label>
+            <input id ="price" type="number" step="0.01" min=0 size="40">
+        </p>
+        <br>
+        <p class="form">
+            <label for="currentQuantity">Enter currentQuantity:</label>
+            <input id ="currentQuantity" type="number" name="currentQuantity" size="40" min = 0>
+        </p>
+        <br>
+        <input type="submit" id="submit" value = "Add Item">
+    </form>
+</section>
 
-    </body>
-</html>
+<!-- <script src="./.js"></script> -->

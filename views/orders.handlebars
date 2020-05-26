@@ -1,136 +1,112 @@
 <!-- Authors: Janet Anderson and Thomas Fattah -->
-<!-- Step: 3 Draft -->
-<!-- Date: May 2, 2020 -->
+<!-- Step: 5 Draft -->
+<!-- Date: May 25, 2020 -->
 <!-- Course: CS 340 -->
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-    <meta charset="utf-8">
-    <title>Ye Olde Robot Shoppe Orders</title>
-    <link rel="stylesheet" href="style.css" type="text/css">
-    </head>
-    <body>
-        <!-- Navigation Bar -->
-        <div class="NaviBar">
-            <a href="index.html">Customers</a>
-            <a class="active" href="orders.html">Orders</a>
-            <a href="items.html">Items</a>
-            <a href="purchases.html">Purchases</a>
-            <a href="suppliers.html">Suppliers</a>
-        </div>
-        <section>
-            <br>
-            This page will display the Orders entity table.  (Below is a mock version of what the SQL SELECT call will display.)
-            Attached to the query will be the added CRUD functions: Edit and Delete.  The Edit button will link to another page that
-            will allow for an Orders entry to be edited (click to see a mock example).  The last CRUD function is the ability to add 
-            and order at the bottom of the page (currently clicking on the Add Order button will not do anything.)
-            <br>
-            <br>
-               
-        </section>
-        <!-- Mock SQL query and CRUD functions for the orders Entity-->
-        <h1>Current Orders:</h1>
-        <section class="Table">
-            <table>
-                <thread>
-                    <tr>
-                        <th>orderID</th>
-                        <th>customerID</th>
-                        <th>orderDate</th>
-                        <th>galacticPay</th>
-                        <th>orderBeamed</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thread>
-                <tbody class="table_body">
-                    <tr>
-                        <td>1001</td>
-                        <td>001</td>
-                        <td>2020-01-01</td>
-                        <td>01234567890123456789</td>
-                        <td>Yes</td>
-                        <td><input type="button" value="Edit" onClick="location.href='editOrder.html'"></button></td>
-                        <td> <button>Delete</button></td>
-                    </tr>
-                    <tr>
-                        <td>1002</td>
-                        <td>002</td>
-                        <td>2020-01-01</td>
-                        <td>98765432109876543210</td>
-                        <td>Yes</td>
-                        <td><input type="button" value="Edit" onClick="location.href='editOrder.html'"></button></td>
-                        <td> <button>Delete</button></td>
-                    </tr>
-                    <tr>
-                        <td>1003</td>
-                        <td>003</td>
-                        <td>2020-01-02</td>
-                        <td>12345678901234567890</td>
-                        <td>Yes</td>
-                        <td><input type="button" value="Edit" onClick="location.href='editOrder.html'"></button></td>
-                        <td> <button>Delete</button></td>
-                    </tr>
-                    <tr>
-                        <td>1004</td>
-                        <td>001</td>
-                        <td>2020-01-03</td>
-                        <td>01234567890123456789</td>
-                        <td>No</td>
-                        <td><input type="button" value="Edit" onClick="location.href='editOrder.html'"></button></td>
-                        <td> <button>Delete</button></td>
-                    </tr>
-                    <tr>
-                        <td>1005</td>
-                        <td>004</td>
-                        <td>2020-01-04</td>
-                        <td>23456789012345678901</td>
-                        <td>No</td>
-                        <td><input type="button" value="Edit" onClick="location.href='editOrder.html'"></button></td>
-                        <td> <button>Delete</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
 
+<title>Ye Olde Robot Shoppe Orders</title>
+
+<!-- Navigation Bar -->
+<div class="NaviBar">
+    <a href="/">Home</a>
+    <a href="customers">Customers</a>
+    <a class="active" href="orders">Orders</a>
+    <a href="items">Items</a>
+    <a href="orderItem">OrderItem</a>
+    <a href="purchases">Purchases</a>
+    <a href="suppliers">Suppliers</a>
+</div>
+
+<!-- Mock SQL query and CRUD functions for the orders Entity-->
+<h1>Current Orders:</h1>
+<section class="Table">
+    <table>
+        <thread>
+            <tr>
+                <th>orderID</th>
+                <th>customerID</th>
+                <th>orderDate</th>
+                <th>galacticPay</th>
+                <th>orderBeamed</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thread>
+        <tbody class="table_body">
+            <tr>
+                <td>1001</td>
+                <td>001</td>
+                <td>2020-01-01</td>
+                <td>01234567890123456789</td>
+                <td>Yes</td>
+                <td><input type="button" value="Edit" onClick="location.href='editOrder'"></button></td>
+                <td> <button>Delete</button></td>
+            </tr>
+            <tr>
+                <td>1002</td>
+                <td>002</td>
+                <td>2020-01-01</td>
+                <td>98765432109876543210</td>
+                <td>Yes</td>
+                <td><input type="button" value="Edit" onClick="location.href='editOrder'"></button></td>
+                <td> <button>Delete</button></td>
+            </tr>
+            <tr>
+                <td>1003</td>
+                <td>003</td>
+                <td>2020-01-02</td>
+                <td>12345678901234567890</td>
+                <td>Yes</td>
+                <td><input type="button" value="Edit" onClick="location.href='editOrder'"></button></td>
+                <td> <button>Delete</button></td>
+            </tr>
+            <tr>
+                <td>1004</td>
+                <td>001</td>
+                <td>2020-01-03</td>
+                <td>01234567890123456789</td>
+                <td>No</td>
+                <td><input type="button" value="Edit" onClick="location.href='editOrder'"></button></td>
+                <td> <button>Delete</button></td>
+            </tr>
+            <tr>
+                <td>1005</td>
+                <td>004</td>
+                <td>2020-01-04</td>
+                <td>23456789012345678901</td>
+                <td>No</td>
+                <td><input type="button" value="Edit" onClick="location.href='editOrder'"></button></td>
+                <td> <button>Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<br>
+
+<h1>Add an order:</h1>
+<section>
+    <form>
+        <p class="form">
+            <label for="customerID">Enter customerID:</label>
+            <input id="customerID" type="number" name="customerID" size="40" min="0">
+        </p>
         <br>
-        <h1>Add an order:</h1>
-        <section>
-            <form>
-                <fieldset>
-                    <label>
-                        Enter customer first name:
-                    <input id="customerFirstName" type="text" name="customerFirstName" size="40" maxlength="255">
-                    </label>
-                    <br>
-                    <label>
-                        Enter customer last name:
-                    <input id="customerLastName" type="text" name="customerLastName" size="40" maxlength="255">
-                    </label>
-                    <br>
-                    <label>
-                        Enter customer planet:
-                    <input id="customerPlanet" type="text" name="customerPlanet" size="40" maxlength="255">
-                    </label>
-                    <br>
-                    <label>
-                        Enter orderDate:
-                        <input id ="orderDate" type="date" name="orderDate" size="40" min = "2020-01-01" max = "2020-12-31">
-                    </label>
-                    <br>
-                    <label>
-                        Enter galacticPay:
-                        <input id ="galacticPay" type="text" inputmode="numeric" patter="[0-9]*" name="galaticPay" size="40" maxlength="20" minlength="20">
-                    </label>
-                    <br>
-                    Please click on the correct value for orderBeamed:
-                        <input id="orderBeamed_true" type="radio" name="orderBeamed_true" value="1" />Yes</label>
-                        <input id="orderBeamed_false" type="radio" name="orderedBeamed_false" value="0" />No</label>  
-                    <br>
-                    <br>  
-                    <input type="submit" id="submit" value = "Add Order">
-                </fieldset>
-            </form>
-        </section>
-    </body>
-</html>
+        <p class="form">
+            <label for="orderDate">Enter orderDate:</label>
+            <input class="date" id ="orderDate" type="date" name="orderDate" size="60" min = "2020-01-01" max = "2020-12-31">
+        </p>
+        <br>
+        <p class="form">
+            <label>Enter galacticPay:</label>
+            <input id ="galacticPay" type="text" inputmode="numeric" pattern="[0-9]*" name="galaticPay" maxlength="20" minlength="20">
+        </p>    
+    </form>
+        <p>
+        Please click on the correct value for orderBeamed:
+        <input id="orderBeamed_true" type="radio" name="orderBeamed_true" value="1" />Yes</label>
+        <input id="orderBeamed_false" type="radio" name="orderedBeamed_false" value="0" />No</label>  
+    </p>             
+    <input type="submit" id="submit" value = "Add Order">
+</section>
+
+<!-- <script src="./.js"></script> -->

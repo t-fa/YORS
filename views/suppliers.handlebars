@@ -1,104 +1,96 @@
 <!-- Authors: Janet Anderson and Thomas Fattah -->
-<!-- Step: 3 Draft -->
-<!-- Date: May 2, 2020 -->
+<!-- Step: 5 Draft -->
+<!-- Date: May 25, 2020 -->
 <!-- Course: CS 340 -->
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Ye Olde Robot Shoppe Suppliers</title>
-    <link rel="stylesheet" href="style.css" type="text/css" />
-  </head>
-  <body>
-    <!-- Navigation Bar -->
-    <div class="NaviBar">
-      <a href="index.html">Customers</a>
-      <a href="orders.html">Orders</a>
-      <a href="items.html">Items</a>
-      <a href="purchases.html">Purchases</a>
-      <a class="active" href="suppliers.html">Suppliers</a>
-    </div>
 
-    <section>
-      <br />
-      This page will display the Suppliers entity table. (Below is a mock
-      version of what the SQL SELECT query will display.) This page will also
-      allow for a new supplier to be added.
-      <br />
-      <br />
-    </section>
-    <!-- Mock SQL query and CRUD functions for the orders Entity-->
-    <h1>Current Suppliers:</h1>
-    <section class="Table">
-      <table>
+<!-- Title -->
+<title>Ye Olde Robot Shoppe Suppliers</title>
+
+<!-- Navigation Bar -->
+<div class="NaviBar">
+    <a href="/">Home</a>
+    <a href="customers">Customers</a>
+    <a href="orders">Orders</a>
+    <a href="items">Items</a>
+    <a href="orderItem">OrderItem</a>
+    <a href="purchases">Purchases</a>
+    <a class="active" href="suppliers">Suppliers</a>
+</div>
+
+<!-- Mock SQL query and CRUD functions for the orders Entity-->
+<h1>Current Suppliers:</h1>
+<section class="Table">
+    <table>
         <thread>
-          <tr>
+        <tr>
             <th>supplierID</th>
             <th>supplierName</th>
             <th>supplierPlanet</th>
-          </tr>
+        </tr>
         </thread>
         <tbody class="table_body">
-          <tr>
+        <tr>
             <td>1</td>
             <td>Robot Renovators</td>
             <td>Coruscant</td>
-          </tr>
-          <tr>
+        </tr>
+        <tr>
             <td>2</td>
             <td>Robotronics</td>
             <td>Coruscant</td>
-          </tr>
-          <tr>
+        </tr>
+        <tr>
             <td>3</td>
             <td>Gear Suppliers, Inc.</td>
             <td>Death Star</td>
-          </tr>
-          <tr>
+        </tr>
+        <tr>
             <td>4</td>
             <td>Not The Droid You're Looking For</td>
             <td>Tattooine</td>
-          </tr>
-          <tr>
+        </tr>
+        <tr>
             <td>5</td>
             <td>C-3PO</td>
             <td>Tattooine</td>
-          </tr>
+        </tr>
         </tbody>
-      </table>
-    </section>
+    </table>
+</section>
 
-    <br />
-    <h1>Add a new supplier:</h1>
-    <section>
-      <form>
-        <fieldset>
-          <label>
+<br />
+<h1>Add a new supplier:</h1>
+<section>
+    <form>
+        <p class="form">
+        <label for="supplierName">
             Enter Supplier Name:
+        </label>
             <input
-              id="supplierName"
-              type="text"
-              name="supplierName"
-              size="40"
-              maxlength="255"
+            id="supplierName"
+            type="text"
+            name="supplierName"
+            size="40"
+            maxlength="255"
             />
-          </label>
-          <br />
-          <label>
+        </p>
+        <br />
+        <p class = "form">
+        <label for="supplierPlanet">
             Enter Supplier Planet:
+        </label>
             <input
-              id="supplierPlanet"
-              type="text"
-              name="supplierPlanet"
-              size="40"
-              maxlength="255"
+            id="supplierPlanet"
+            type="text"
+            name="supplierPlanet"
+            size="40"
+            maxlength="255"
             />
-          </label>
-          <br />
-          <br />
-          <input type="submit" id="submit" value="Add Supplier" />
+        </p>
+        <br />
+        <input type="submit" id="submit" value="Add Supplier" />
         </fieldset>
-      </form>
-    </section>
-  </body>
-</html>
+    </form>
+</section>
+
+<!-- <script src="./.js"></script> -->
