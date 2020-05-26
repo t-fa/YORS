@@ -6,54 +6,43 @@
 <!-- Title -->
 <title>Ye Olde Robot Shoppe Suppliers</title>
 
-<!-- Navigation Bar -->
-<div class="NaviBar">
-    <a href="/">Home</a>
-    <a href="customers">Customers</a>
-    <a href="orders">Orders</a>
-    <a href="items">Items</a>
-    <a href="orderItem">OrderItem</a>
-    <a href="purchases">Purchases</a>
-    <a class="active" href="suppliers">Suppliers</a>
-</div>
-
 <!-- Mock SQL query and CRUD functions for the orders Entity-->
 <h1>Current Suppliers:</h1>
 <section class="Table">
     <table>
         <thread>
-        <tr>
-            <th>supplierID</th>
-            <th>supplierName</th>
-            <th>supplierPlanet</th>
-        </tr>
+            <tr>
+                <th>supplierID</th>
+                <th>supplierName</th>
+                <th>supplierPlanet</th>
+            </tr>
         </thread>
         <tbody class="table_body">
-        <tr>
-            <td>1</td>
-            <td>Robot Renovators</td>
-            <td>Coruscant</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Robotronics</td>
-            <td>Coruscant</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Gear Suppliers, Inc.</td>
-            <td>Death Star</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Not The Droid You're Looking For</td>
-            <td>Tattooine</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>C-3PO</td>
-            <td>Tattooine</td>
-        </tr>
+            <tr>
+                <td>1</td>
+                <td>Robot Renovators</td>
+                <td>Coruscant</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Robotronics</td>
+                <td>Coruscant</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Gear Suppliers, Inc.</td>
+                <td>Death Star</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Not The Droid You're Looking For</td>
+                <td>Tattooine</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>C-3PO</td>
+                <td>Tattooine</td>
+            </tr>
         </tbody>
     </table>
 </section>
@@ -63,29 +52,17 @@
 <section>
     <form>
         <p class="form">
-        <label for="supplierName">
-            Enter Supplier Name:
-        </label>
-            <input
-            id="supplierName"
-            type="text"
-            name="supplierName"
-            size="40"
-            maxlength="255"
-            />
+            <label for="supplierName">
+                Enter Supplier Name:
+            </label>
+            <input id="supplierName" type="text" name="supplierName" size="40" maxlength="255" />
         </p>
         <br />
-        <p class = "form">
-        <label for="supplierPlanet">
-            Enter Supplier Planet:
-        </label>
-            <input
-            id="supplierPlanet"
-            type="text"
-            name="supplierPlanet"
-            size="40"
-            maxlength="255"
-            />
+        <p class="form">
+            <label for="supplierPlanet">
+                Enter Supplier Planet:
+            </label>
+            <input id="supplierPlanet" type="text" name="supplierPlanet" size="40" maxlength="255" />
         </p>
         <br />
         <input type="submit" id="submit" value="Add Supplier" />

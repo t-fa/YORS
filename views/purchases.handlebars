@@ -5,54 +5,43 @@
 
 <title>Ye Olde Robot Shoppe Purchases</title>
 
-<!-- Navigation Bar -->
-<div class="NaviBar">
-    <a href="/">Home</a>
-    <a href="customers">Customers</a>
-    <a href="orders">Orders</a>
-    <a href="items">Items</a>
-    <a href="orderItem">OrderItem</a>
-    <a class="active" href="purchases">Purchases</a>
-    <a href="suppliers">Suppliers</a>
-</div>
-
 <!-- Mock SQL query and CRUD functions for the orders Entity-->
 <h1>Current Purchases:</h1>
 <section class="Table">
     <table>
         <thread>
-        <tr>
-            <th>purchaseID</th>
-            <th>purchaseDate</th>
-            <th>customerID</th>
-        </tr>
+            <tr>
+                <th>purchaseID</th>
+                <th>purchaseDate</th>
+                <th>customerID</th>
+            </tr>
         </thread>
         <tbody class="table_body">
-        <tr>
-            <td>1</td>
-            <td>2020-01-20</td>
-            <td>3</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>2020-03-13</td>
-            <td>5</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>2020-03-13</td>
-            <td>5</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>2020-03-14</td>
-            <td>2</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>2020-04-24</td>
-            <td>1</td>
-        </tr>
+            <tr>
+                <td>1</td>
+                <td>2020-01-20</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>2020-03-13</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>2020-03-13</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>2020-03-14</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>2020-04-24</td>
+                <td>1</td>
+            </tr>
         </tbody>
     </table>
 </section>
@@ -62,28 +51,17 @@
 <section>
     <form>
         <p class="form">
-        <label for="customerID">
-            Enter customerID:
-        </label>
-            <input
-            id="customerID"
-            type="number"
-            name="customerID"
-            size="40"
-            min = "1"
-            />
+            <label for="customerID">
+                Enter customerID:
+            </label>
+            <input id="customerID" type="number" name="customerID" size="40" min="1" />
         </p>
         <br />
         <p class="form">
-        <label for="purchaseDate">
-            Enter Date of Purchase:
-        </label>
-            <input class="date"
-            id="purchaseDate"
-            type="date"
-            name="purchaseDate"
-            size="40"
-            />
+            <label for="purchaseDate">
+                Enter Date of Purchase:
+            </label>
+            <input class="date" id="purchaseDate" type="date" name="purchaseDate" size="40" />
         </p>
         <br />
         <input type="submit" id="submit" value="Add Purchase" />

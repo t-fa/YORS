@@ -1,14 +1,21 @@
 const express = require('express'),
-  mysql = require('./dbcon.js'),  // Storing credentials in another file
+  mysql = require('./dbcon.js'), // Storing credentials in another file
   app = express(),
   bodyParser = require('body-parser'),
-  handlebars = require('express-handlebars').create({ defaultLayout: 'main' }),
+  handlebars = require('express-handlebars'),
   path = require('path');
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.engine('handlebars', handlebars.engine);
+app.engine(
+  'handlebars',
+  handlebars({
+    defaultLayout: 'main',
+    layoutsDir: __dirname + '/views/layouts/',
+    partialsDir: __dirname + '/views/partials/',
+  })
+);
 app.set('view engine', 'handlebars');
 app.set('port', process.argv[2]);
 
@@ -35,8 +42,6 @@ app.get('/purchases', (req, res) => res.render('purchases'));
 
 //Suppliers
 app.get('/suppliers', (req, res) => res.render('suppliers'));
-
-
 
 app.listen(app.get('port'), function () {
   console.log(
