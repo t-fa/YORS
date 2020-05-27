@@ -1,47 +1,271 @@
 const express = require('express'),
   mysql = require('./dbcon.js'), // Storing credentials in another file
   app = express(),
-  bodyParser = require('body-parser'),
   handlebars = require('express-handlebars'),
   path = require('path');
 
-app.use(express.static(path.join(__dirname, 'public')));
+  app.use(express.static(path.join(__dirname, 'public')));
+
+  app.engine(
+    'handlebars',
+    handlebars({
+      defaultLayout: 'main',
+      layoutsDir: __dirname + '/views/layouts/',
+      partialsDir: __dirname + '/views/partials/',
+    })
+  );
+  app.set('view engine', 'handlebars');
+  app.set('port', process.argv[2]);
+
+const request = require('request');
+
+const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.engine(
-  'handlebars',
-  handlebars({
-    defaultLayout: 'main',
-    layoutsDir: __dirname + '/views/layouts/',
-    partialsDir: __dirname + '/views/partials/',
-  })
-);
-app.set('view engine', 'handlebars');
-app.set('port', process.argv[2]);
+
 
 // Index Page
 app.get('/', (req, res) => res.render('index'));
 
+
 //Customers
-app.get('/customers', (req, res) => res.render('customers'));
+app.get('/customers', (req, res, next) => {
+  let sql = "SELECT `customerID`, `customerFirstName`, `customerLastName`, `customerPlanet` FROM `Customers`";
+  let query = mysql.pool.query(sql, (err,results) =>{
+    if(err) {
+      next(err);
+      return;
+    }
+    res.render('customers', {results: results});
+  });
+});
+
+
+// Add a new Customer
+app.post('/customers', (req, res, next) => {
+
+  if (req.body['addCustomer']) {
+    mysql.pool.query("INSERT INTO `Customers` (`customerFirstName`, `customerLastName`, `customerPlanet`) VALUES (?,?,?)", [req.body.customerFirstName, req.body.customerLastName, req.body.customerPlanet], (err) => {
+      if(err) {
+        next(err);
+        return;
+      }
+    
+    let sql = "SELECT `customerID`, `customerFirstName`, `customerLastName`, `customerPlanet` FROM `Customers`";
+    let query = mysql.pool.query(sql, (err,results) =>{
+      if(err) throw err;
+      res.render('customers', {results: results});
+    });
+    
+    });
+  };
+});
+
 
 //Orders
-app.get('/orders', (req, res) => res.render('orders'));
+app.get('/orders', (req, res, next) => {
+  let sql = "SELECT `orderID`, `customerID`, `orderDate`, `galacticPay`, `orderBeamed` FROM `Orders`";
+  let query = mysql.pool.query(sql, (err,results) =>{
+    if(err) {
+      next(err);
+      return;
+    }
+    res.render('orders', {results: results});
+  });
+});
+
+
+// Add a new order
+app.post('/orders', (req, res, next) => {
+
+  if (req.body['addOrder']) {
+    mysql.pool.query("INSERT INTO `Orders` (`customerID`, `orderBeamed`, `orderDate`, `galacticPay`) VALUES (?,?,?,?)", [req.body.customerID, req.body.orderBeamed, req.body.orderDate, req.body.galaticPay], (err) => {
+      if(err) {
+        next(err);
+        return;
+      }
+    
+      let sql = "SELECT `orderID`, `customerID`, `orderDate`, `galacticPay`, `orderBeamed` FROM `Orders`";
+      let query = mysql.pool.query(sql, (err,results) =>{
+        if(err) {
+          next(err);
+          return;
+        }
+        res.render('orders', {results: results});
+      });
+    
+    });
+  };
+});
+
 
 //Edit Orders
 app.get('/editOrder', (req, res) => res.render('editOrder'));
 
+
 //Items
-app.get('/items', (req, res) => res.render('items'));
+app.get('/items', (req, res, next)=> {
+  let sql = "SELECT `itemID`, `itemType`, `supplierID`, `YeOldePrice`, `currentQuantity` FROM `Items`";
+  let query = mysql.pool.query(sql, (err, results) => {
+    if(err) {
+      next(err);
+      return;
+    }
+    res.render('items', {results: results});
+  });
+});
+
+
+// Add a new Item
+app.post('/items', (req, res, next) => {
+
+  if (req.body['addItem']) {
+
+    if (req.body.s_id === 'NULL'){
+      mysql.pool.query("INSERT INTO `Items` (`itemType`, `YeOldePrice`, `currentQuantity`) VALUES (?,?,?)", [req.body.item, req.body.price, req.body.quantity], (err) => {
+        if(err) {
+          next(err);
+          return;
+        }
+      
+        let sql = "SELECT `itemID`, `itemType`, `supplierID`, `YeOldePrice`, `currentQuantity` FROM `Items`";
+        let query = mysql.pool.query(sql, (err,results) =>{
+          if(err) {
+            next(err);
+            return;
+          }
+        res.render('items', {results: results});
+      });
+    });
+    }
+    else
+    {
+      mysql.pool.query("INSERT INTO `Items` (`itemType`, `supplierID`, `YeOldePrice`, `currentQuantity`) VALUES (?,?,?,?)", [req.body.item, req.body.s_id, req.body.price, req.body.quantity], (err) => {
+        if(err) {
+          next(err);
+          return;
+        }
+
+        let sql = "SELECT `itemID`, `itemType`, `supplierID`, `YeOldePrice`, `currentQuantity` FROM `Items`";
+        let query = mysql.pool.query(sql, (err,results) =>{
+          if(err) {
+            next(err);
+            return;
+          }
+        res.render('items', {results: results});
+    });
+  });
+  }
+ };
+});
+
 
 //OrderItem
-app.get('/orderItem', (req, res) => res.render('orderItem'));
+app.get('/orderItem', (req, res, next) => {
+  let sql = "SELECT `orderID`, `itemID`, `quantity` FROM `OrderItem`";
+  let query = mysql.pool.query(sql, (err,results) =>{
+    if(err) {
+      next(err);
+      return;
+    }
+    res.render('orderItem', {results: results});
+  });
+});
+
+
+// Add a new item to an order
+app.post('/orderItem', (req, res, next) => {
+
+  if (req.body['addItemToOrder']) {
+    mysql.pool.query("INSERT INTO `OrderItem` (`orderID`, `itemID`, `quantity`) VALUES (?,?,?)", [req.body.orderID, req.body.itemID, req.body.quantity], (err) => {
+      if(err) {
+        next(err);
+        return;
+      }
+    
+      let sql = "SELECT `orderID`, `itemID`, `quantity` FROM `OrderItem`";
+      let query = mysql.pool.query(sql, (err,results) =>{
+        if(err) {
+          next(err);
+          return;
+        }
+        res.render('orderItem', {results: results});
+      });
+    
+    });
+  };
+});
+
 
 //Purchases
-app.get('/purchases', (req, res) => res.render('purchases'));
+app.get('/purchases', (req, res, next) => {
+  let sql = "SELECT `purchaseID`, `purchaseDate`, `customerID` FROM `Purchases`";
+  let query = mysql.pool.query(sql, (err,results) =>{
+    if(err) {
+      next(err);
+      return;
+    }
+    res.render('purchases', {results: results});
+  });
+});
+
+
+// Add a new purchase
+app.post('/purchases', (req, res, next) => {
+
+  if (req.body['addPurchase']) {
+    mysql.pool.query("INSERT INTO `Purchases` (`purchaseDate`, `customerID`) VALUES (?,?)", [req.body.purchaseDate, req.body.customerID], (err) => {
+      if(err) {
+        next(err);
+        return;
+      }
+    
+      let sql = "SELECT `purchaseID`, `purchaseDate`, `customerID` FROM `Purchases`";
+      let query = mysql.pool.query(sql, (err,results) =>{
+        if(err) {
+          next(err);
+          return;
+        }
+        res.render('purchases', {results: results});
+      });
+    
+    });
+  };
+});
+
 
 //Suppliers
-app.get('/suppliers', (req, res) => res.render('suppliers'));
+app.get('/suppliers', (req, res, next) => {
+  let sql = "SELECT `supplierID`, `supplierName`, `supplierPlanet` FROM `Suppliers`";
+  let query = mysql.pool.query(sql, (err,results) =>{
+    if(err) {
+      next(err);
+      return;
+    }
+    res.render('suppliers', {results: results});
+  });
+});
+
+// Add a new supplier
+app.post('/suppliers', (req, res, next) => {
+
+  if (req.body['addSupplier']) {
+    mysql.pool.query("INSERT INTO `Suppliers` (`supplierName`, `supplierPlanet`) VALUES (?,?)", [req.body.name, req.body.planet], (err) => {
+      if(err) {
+        next(err);
+        return;
+      }
+    
+    let sql = "SELECT `supplierID`, `supplierName`, `supplierPlanet` FROM `Suppliers`";
+    let query = mysql.pool.query(sql, (err,results) =>{
+      if(err) throw err;
+      res.render('suppliers', {results: results});
+    });
+    
+    });
+  };
+});
+
 
 app.listen(app.get('port'), function () {
   console.log(

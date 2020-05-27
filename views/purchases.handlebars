@@ -11,52 +11,42 @@
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
-                <th>purchaseID</th>
-                <th>purchaseDate</th>
-                <th>customerID</th>
+                <th>Purchase ID</th>
+                <th>Purchase Date</th>
+                <th>Customer ID</th>
             </tr>
         </thead>
         <tbody>
+            {{#each results}}
             <tr>
-                <td>1</td>
-                <td>2020-01-20</td>
-                <td>3</td>
+                <td>{{ this.purchaseID }}</td>
+                <td>{{ this.purchaseDate }}</td>
+                <td>{{ this.customerID }}</td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>2020-03-13</td>
-                <td>5</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>2020-03-13</td>
-                <td>5</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>2020-03-14</td>
-                <td>2</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>2020-04-24</td>
-                <td>1</td>
-            </tr>
+            {{/each}}
         </tbody>
     </table>
 </section>
 
+<br>
+
 <h1>Add a new purchase:</h1>
 <section>
-    <form>
+    <form method="post">
         <div class="form-group">
             <label for="customerID">Enter customerID:
-                <input class="form-control" type="number" name="customerID" size="40" min="1" />
+                <select class="custom-select" name="customerID">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
             </label>
             <label>Enter Date of Purchase:
                 <input class="form-control" type="date" name="purchaseDate" size="40" />
             </label>
-            <input type="submit" class="btn btn-primary" value="Add Purchase" />
+            <input type="submit" class="btn btn-primary" value="Add Purchase" name="addPurchase" />
         </div>
     </form>
 </section>

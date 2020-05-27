@@ -5,67 +5,33 @@
 
 <title>Ye Olde Robot Shoppe Orders</title>
 
-<!-- Mock SQL query and CRUD functions for the orders Entity-->
+<!-- SQL SELECT query for the Orders Entity & Mock Edit/Delete CRUD functionality-->
 <h1>Current Orders:</h1>
 <section>
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
-                <th>orderID</th>
-                <th>customerID</th>
-                <th>orderDate</th>
+                <th>Order ID</th>
+                <th>Customer ID</th>
+                <th>Date of Order</th>
                 <th>galacticPay</th>
-                <th>orderBeamed</th>
+                <th>Order Beamed?</th>
                 <th></th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
+            {{#each results}}
             <tr>
-                <td>1001</td>
-                <td>001</td>
-                <td>2020-01-01</td>
-                <td>01234567890123456789</td>
-                <td>Yes</td>
+                <td>{{ this.orderID }}</td>
+                <td>{{ this.customerID }}</td>
+                <td>{{ this.orderDate }}</td>
+                <td>{{ this.galacticPay }}</td>
+                <td>{{ this.orderBeamed }}</td>
                 <td><input type="button" class="btn btn-info" value="Edit" onClick="location.href='editOrder'"></td>
                 <td> <button class="btn btn-info">Delete</button></td>
             </tr>
-            <tr>
-                <td>1002</td>
-                <td>002</td>
-                <td>2020-01-01</td>
-                <td>98765432109876543210</td>
-                <td>Yes</td>
-                <td><input type="button" class="btn btn-info" value="Edit" onClick="location.href='editOrder'"></td>
-                <td> <button class="btn btn-info">Delete</button></td>
-            </tr>
-            <tr>
-                <td>1003</td>
-                <td>003</td>
-                <td>2020-01-02</td>
-                <td>12345678901234567890</td>
-                <td>Yes</td>
-                <td><input type="button" class="btn btn-info" value="Edit" onClick="location.href='editOrder'"></td>
-                <td> <button class="btn btn-info">Delete</button></td>
-            </tr>
-            <tr>
-                <td>1004</td>
-                <td>001</td>
-                <td>2020-01-03</td>
-                <td>01234567890123456789</td>
-                <td>No</td>
-                <td><input type="button" class="btn btn-info" value="Edit" onClick="location.href='editOrder'"></td>
-                <td> <button class="btn btn-info">Delete</button></td>
-            </tr>
-            <tr>
-                <td>1005</td>
-                <td>004</td>
-                <td>2020-01-04</td>
-                <td>23456789012345678901</td>
-                <td>No</td>
-                <td><input type="button" class="btn btn-info" value="Edit" onClick="location.href='editOrder'"></td>
-                <td><button class="btn btn-info">Delete</button></td>
-            </tr>
+            {{/each}}
         </tbody>
     </table>
 </section>
@@ -74,33 +40,35 @@
 
 <h1>Add an order:</h1>
 <section>
-    <form>
+    <form method="post">
         <div class="form-group">
             <label>Enter customerID:
-                <input type="number" class="form-control" name="customerID" size="40" min="0">
+                <select class="custom-select" name="customerID">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
             </label>
+            <label>Please select the correct value for orderBeamed:
+                <select class="custom-select" name="orderBeamed">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </label>
+        </div>
+        
+        <div class="form-group">
             <label>Enter orderDate:
                 <input type="date" class="form-control" type="date" name="orderDate" size="60" min="2020-01-01"
                     max="2020-12-31">
             </label>
             <label>Enter galacticPay:
                 <input class="form-control" type="text" inputmode="numeric" pattern="[0-9]*" name="galaticPay"
-                    maxlength="20" minlength="20">
+                    maxlength="20" minlength="20" placeholder="12345678951321564879">
             </label>
         </div>
-        Please click on the correct value for orderBeamed:
-        <div class="custom-control custom-radio">
-            <label>Yes
-                <input type="radio" class="custom-control-input" name="orderBeamed_true" value="1" />
-            </label>
-        </div>
-        <div class="custom-control custom-radio">
-            <label>No
-                <input type="radio" class="custom-control-input" name="orderedBeamed_false" value="0" />
-            </label>
-        </div>
-        <input type="submit" class="btn btn-primary" value="Add Order">
+        <input type="submit" class="btn btn-primary" value="Add Order" name="addOrder">
     </form>
 </section>
-
-<!-- <script src="./.js"></script> -->

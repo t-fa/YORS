@@ -6,9 +6,8 @@
 <!-- Title -->
 <title>Ye Olde Robot Shoppe Customers</title>
 
-<!-- Mock SQL query and CRUD functions for the orders Entity-->
+<!-- SQL SELECT query for the Customers Entity-->
 <h1>Current Customers:</h1>
-
 
 <form>
     <div class="form-group row">
@@ -31,43 +30,21 @@
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
-                <th>customerID</th>
-                <th>customerFirstName</th>
-                <th>customerLastName</th>
-                <th>customerPlanet</th>
+                <th>Customer ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Planet</th>
             </tr>
         </thead>
         <tbody>
+            {{#each results}}
             <tr>
-                <td>1</td>
-                <td>Bob</td>
-                <td>Saget</td>
-                <td>Earth</td>
+                <td>{{ this.customerID }}</td>
+                <td>{{ this.customerFirstName }}</td>
+                <td>{{ this.customerLastName }}</td>
+                <td>{{ this.customerPlanet }}</td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>Kanye</td>
-                <td>West</td>
-                <td>Jupiter</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>VR</td>
-                <td>2103</td>
-                <td>Ergotron V</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>CRK</td>
-                <td>42</td>
-                <td>Machina</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>PR</td>
-                <td>007</td>
-                <td>Chin Thum</td>
-            </tr>
+            {{/each}}
         </tbody>
     </table>
 </section>
@@ -75,7 +52,7 @@
 <br />
 <h1>Add a new customer:</h1>
 <section>
-    <form>
+    <form method="post">
         <div class="form-group">
             <label>Enter First Name:
                 <input type="text" class="form-control" name="customerFirstName" size="40" maxlength="255" />
@@ -86,6 +63,6 @@
             <label>Enter Planet:
                 <input type="text" class="form-control" name="customerPlanet" size="40" maxlength="255" />
             </label>
-            <input type="submit" class="btn btn-primary" value="Add Customer" />
+            <input type="submit" class="btn btn-primary" value="Add Customer" name="addCustomer" />
     </form>
 </section>

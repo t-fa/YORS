@@ -12,52 +12,36 @@
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
-                <th>supplierID</th>
-                <th>supplierName</th>
-                <th>supplierPlanet</th>
+                <th>Supplier ID</th>
+                <th>Name</th>
+                <th>Planet</th>
             </tr>
         </thead>
         <tbody>
+            {{#each results}}
             <tr>
-                <td>1</td>
-                <td>Robot Renovators</td>
-                <td>Coruscant</td>
+                <td>{{ this.supplierID }}</td>
+                <td>{{ this.supplierName }}</td>
+                <td>{{ this.supplierPlanet }}</td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>Robotronics</td>
-                <td>Coruscant</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Gear Suppliers, Inc.</td>
-                <td>Death Star</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>Not The Droid You're Looking For</td>
-                <td>Tattooine</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>C-3PO</td>
-                <td>Tattooine</td>
-            </tr>
+            {{/each}}
         </tbody>
     </table>
 </section>
 
+<br>
+
 <h1>Add a new supplier:</h1>
 <section>
-    <form>
+    <form method="post">
         <div class="form-group">
             <label>Enter Supplier Name:
-                <input class="form-control" type="text" name="supplierName" size="40" maxlength="255" />
+                <input class="form-control" type="text" name="name" size="40" maxlength="255" />
             </label>
             <label>Enter Supplier Planet:
-                <input class="form-control" type="text" name="supplierPlanet" size="40" maxlength="255" />
+                <input class="form-control" type="text" name="planet" size="40" maxlength="255" />
             </label>
-            <input type="submit" class="btn btn-primary" value="Add Supplier" />
+            <input type="submit" class="btn btn-primary" value="Add Supplier" name="addSupplier" />
         </div>
     </form>
 </section>

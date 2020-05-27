@@ -6,43 +6,27 @@
 <!-- Title -->
 <title>Ye Olde Robot Shoppe OrderItem</title>
 
-<!-- Mock SQL query and CRUD functions for the orders Entity-->
+<!-- SQL SELECT query for the orderItem Entity & Mock Delete CRUD functionality-->
 <h1>Current Order Numbers and Items:</h1>
 <section>
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
-                <th>orderID</th>
-                <th>itemID</th>
-                <th>quantity</th>
+                <th>Order ID</th>
+                <th>Item ID</th>
+                <th>Quantity</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
+            {{#each results}}
             <tr>
-                <td>1001</td>
-                <td>001</td>
-                <td>2</td>
+                <td>{{ this.orderID }}</td>
+                <td>{{ this.itemID }}</td>
+                <td>{{ this.quantity }}</td>
+                <td> <button class="btn btn-info">Delete</button></td>
             </tr>
-            <tr>
-                <td>1001</td>
-                <td>002</td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <td>1002</td>
-                <td>003</td>
-                <td>4</td>
-            </tr>
-            <tr>
-                <td>1003</td>
-                <td>001</td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <td>1003</td>
-                <td>004</td>
-                <td>2</td>
-            </tr>
+            {{/each}}
         </tbody>
     </table>
 </section>
@@ -51,18 +35,30 @@
 
 <h1>Add an item to an order:</h1>
 <section>
-    <form>
+    <form method="post">
         <div class="form-group">
             <label>Enter orderID:
-                <input class="form-control" type="number" name="OrderID" size="40" min="1">
+                <select class="custom-select" name="orderID">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
             </label>
             <label>Enter itemID:
-                <input class="form-control" type="number" name="itemID" size="40" min="1">
+                <select class="custom-select" name="itemID">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
             </label>
             <label>Enter quantity:
                 <input class="form-control" type="number" name="quantity" size="40" min="1">
             </label>
         </div>
+        <input type="submit" class="btn btn-primary" value="Add Item to Order" name="addItemToOrder">
     </form>
-    <input type="submit" class="btn btn-primary" value="Add Item to Order">
 </section>
