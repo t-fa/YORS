@@ -6,7 +6,9 @@ const express = require('express'),
   bodyParser = require('body-parser'),
   orderRouter = require('./routes/orderRouter'),
   customerRouter = require('./routes/customerRouter'),
-  itemRouter = require('./routes/itemRouter');
+  itemRouter = require('./routes/itemRouter'),
+  purchaseRouter = require('./routes/purchaseRouter'),
+  supplierRouter = require('./routes/supplierRouter');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -39,6 +41,12 @@ app.get('/editOrder', (req, res) => res.render('editOrder'));
 //Items
 app.use('/items', itemRouter);
 
+//Purchases
+app.use('/purchases', purchaseRouter);
+
+//Suppliers
+app.use('/suppliers', supplierRouter);
+
 //OrderItem
 app.get('/orderItem', (req, res, next) => {
   let sql = 'SELECT `orderID`, `itemID`, `quantity` FROM `OrderItem`';
@@ -70,81 +78,6 @@ app.post('/orderItem', (req, res, next) => {
             return;
           }
           res.render('orderItem', { results: results });
-        });
-      }
-    );
-  }
-});
-
-//Purchases
-app.get('/purchases', (req, res, next) => {
-  let sql =
-    'SELECT `purchaseID`, `purchaseDate`, `customerID` FROM `Purchases`';
-  let query = mysql.pool.query(sql, (err, results) => {
-    if (err) {
-      next(err);
-      return;
-    }
-    res.render('purchases', { results: results });
-  });
-});
-
-// Add a new purchase
-app.post('/purchases', (req, res, next) => {
-  if (req.body['addPurchase']) {
-    mysql.pool.query(
-      'INSERT INTO `Purchases` (`purchaseDate`, `customerID`) VALUES (?,?)',
-      [req.body.purchaseDate, req.body.customerID],
-      (err) => {
-        if (err) {
-          next(err);
-          return;
-        }
-
-        let sql =
-          'SELECT `purchaseID`, `purchaseDate`, `customerID` FROM `Purchases`';
-        let query = mysql.pool.query(sql, (err, results) => {
-          if (err) {
-            next(err);
-            return;
-          }
-          res.render('purchases', { results: results });
-        });
-      }
-    );
-  }
-});
-
-//Suppliers
-app.get('/suppliers', (req, res, next) => {
-  let sql =
-    'SELECT `supplierID`, `supplierName`, `supplierPlanet` FROM `Suppliers`';
-  let query = mysql.pool.query(sql, (err, results) => {
-    if (err) {
-      next(err);
-      return;
-    }
-    res.render('suppliers', { results: results });
-  });
-});
-
-// Add a new supplier
-app.post('/suppliers', (req, res, next) => {
-  if (req.body['addSupplier']) {
-    mysql.pool.query(
-      'INSERT INTO `Suppliers` (`supplierName`, `supplierPlanet`) VALUES (?,?)',
-      [req.body.name, req.body.planet],
-      (err) => {
-        if (err) {
-          next(err);
-          return;
-        }
-
-        let sql =
-          'SELECT `supplierID`, `supplierName`, `supplierPlanet` FROM `Suppliers`';
-        let query = mysql.pool.query(sql, (err, results) => {
-          if (err) throw err;
-          res.render('suppliers', { results: results });
         });
       }
     );
