@@ -4,7 +4,8 @@ const express = require('express'),
   handlebars = require('express-handlebars'),
   path = require('path'),
   bodyParser = require('body-parser'),
-  orderRouter = require('./routes/orderRouter');
+  orderRouter = require('./routes/orderRouter'),
+  customerRouter = require('./routes/customerRouter');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -25,47 +26,8 @@ app.use(bodyParser.json());
 // Index Page
 app.get('/', (req, res) => res.render('index'));
 
-app.get('/customers', (req, res) => res.render('index'));
-
 //Customers
-// app.get('/customers', (req, res, next) => {
-//   let sql =
-//     'SELECT `customerID`, `customerFirstName`, `customerLastName`, `customerPlanet` FROM `Customers`';
-//   let query = mysql.pool.query(sql, (err, results) => {
-//     if (err) {
-//       next(err);
-//       return;
-//     }
-//     res.render('customers', { results: results });
-//   });
-// });
-
-// Add a new Customer
-app.post('/customers', (req, res, next) => {
-  if (req.body['addCustomer']) {
-    mysql.pool.query(
-      'INSERT INTO `Customers` (`customerFirstName`, `customerLastName`, `customerPlanet`) VALUES (?,?,?)',
-      [
-        req.body.customerFirstName,
-        req.body.customerLastName,
-        req.body.customerPlanet,
-      ],
-      (err) => {
-        if (err) {
-          next(err);
-          return;
-        }
-
-        let sql =
-          'SELECT `customerID`, `customerFirstName`, `customerLastName`, `customerPlanet` FROM `Customers`';
-        let query = mysql.pool.query(sql, (err, results) => {
-          if (err) throw err;
-          res.render('customers', { results: results });
-        });
-      }
-    );
-  }
-});
+app.use('/customers', customerRouter);
 
 //Orders
 app.use('/orders', orderRouter);
