@@ -29,15 +29,15 @@ orderRouter
           req.body.orderDate,
           req.body.galaticPay,
         ],
-        (err, results) => {
+        (err) => {
           if (err) {
             next(err);
             return;
           }
-          res.render('orders', { results: results });
         }
       );
     }
+    res.redirect('orders');
   });
 
 module.exports = orderRouter;

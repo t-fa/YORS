@@ -36,6 +36,7 @@ customerRouter
         }
       );
     }
+    res.redirect('customers');
   });
 
 module.exports = customerRouter;

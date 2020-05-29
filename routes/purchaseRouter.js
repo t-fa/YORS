@@ -3,8 +3,8 @@ const express = require('express'),
   mysql = require('../dbcon.js');
 
 const purchaseRouter = express.Router();
-orderRouter.use(bodyParser.urlencoded({ extended: false }));
-orderRouter.use(bodyParser.json());
+purchaseRouter.use(bodyParser.urlencoded({ extended: false }));
+purchaseRouter.use(bodyParser.json());
 
 purchaseRouter
   .route('/')
@@ -32,6 +32,7 @@ purchaseRouter
         }
       );
     }
+    res.redirect('purchases');
   });
 
 module.exports = purchaseRouter;

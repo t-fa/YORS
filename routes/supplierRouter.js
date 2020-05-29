@@ -32,6 +32,7 @@ supplierRouter
         }
       );
     }
+    res.redirect('suppliers');
   });
 
 module.exports = supplierRouter;

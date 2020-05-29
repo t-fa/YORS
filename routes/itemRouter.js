@@ -50,6 +50,7 @@ itemRouter
         );
       }
     }
+    res.redirect('items');
   });
 
 module.exports = itemRouter;
