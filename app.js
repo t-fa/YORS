@@ -5,7 +5,8 @@ const express = require('express'),
   path = require('path'),
   bodyParser = require('body-parser'),
   orderRouter = require('./routes/orderRouter'),
-  customerRouter = require('./routes/customerRouter');
+  customerRouter = require('./routes/customerRouter'),
+  itemRouter = require('./routes/itemRouter');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -36,66 +37,7 @@ app.use('/orders', orderRouter);
 app.get('/editOrder', (req, res) => res.render('editOrder'));
 
 //Items
-app.get('/items', (req, res, next) => {
-  let sql =
-    'SELECT `itemID`, `itemType`, `supplierID`, `YeOldePrice`, `currentQuantity` FROM `Items`';
-  let query = mysql.pool.query(sql, (err, results) => {
-    if (err) {
-      next(err);
-      return;
-    }
-    res.render('items', { results: results });
-  });
-});
-
-// Add a new Item
-app.post('/items', (req, res, next) => {
-  if (req.body['addItem']) {
-    if (req.body.s_id === 'NULL') {
-      mysql.pool.query(
-        'INSERT INTO `Items` (`itemType`, `YeOldePrice`, `currentQuantity`) VALUES (?,?,?)',
-        [req.body.item, req.body.price, req.body.quantity],
-        (err) => {
-          if (err) {
-            next(err);
-            return;
-          }
-
-          let sql =
-            'SELECT `itemID`, `itemType`, `supplierID`, `YeOldePrice`, `currentQuantity` FROM `Items`';
-          let query = mysql.pool.query(sql, (err, results) => {
-            if (err) {
-              next(err);
-              return;
-            }
-            res.render('items', { results: results });
-          });
-        }
-      );
-    } else {
-      mysql.pool.query(
-        'INSERT INTO `Items` (`itemType`, `supplierID`, `YeOldePrice`, `currentQuantity`) VALUES (?,?,?,?)',
-        [req.body.item, req.body.s_id, req.body.price, req.body.quantity],
-        (err) => {
-          if (err) {
-            next(err);
-            return;
-          }
-
-          let sql =
-            'SELECT `itemID`, `itemType`, `supplierID`, `YeOldePrice`, `currentQuantity` FROM `Items`';
-          let query = mysql.pool.query(sql, (err, results) => {
-            if (err) {
-              next(err);
-              return;
-            }
-            res.render('items', { results: results });
-          });
-        }
-      );
-    }
-  }
-});
+app.use('/items', itemRouter);
 
 //OrderItem
 app.get('/orderItem', (req, res, next) => {
