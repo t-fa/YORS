@@ -22,7 +22,7 @@ itemRouter
       context.items = results;
 
       let sql2 = 'SELECT `supplierID`, `supplierName` FROM `Suppliers`';
-      mysql.pool.query(sql2, (err,results) => {
+      mysql.pool.query(sql2, (err, results) => {
         if (err) {
           next(err);
           return;
@@ -43,20 +43,14 @@ itemRouter
             if (err) {
               next(err);
               return;
-            } 
+            }
           }
         );
-      }
-      else {
+      } else {
         console.log(req.body.s_id);
         mysql.pool.query(
           'INSERT INTO `Items` (`itemType`, `supplierID`, `YeOldePrice`, `currentQuantity`) VALUES (?,?,?,?)',
-          [
-            req.body.item,
-            req.body.s_id,
-            req.body.price,
-            req.body.quantity,
-          ],
+          [req.body.item, req.body.s_id, req.body.price, req.body.quantity],
           (err) => {
             if (err) {
               next(err);
@@ -68,5 +62,58 @@ itemRouter
     }
     res.redirect('items');
   });
+
+itemRouter
+  .route('/:itemId')
+  .get((req, res) => {
+    let context = {};
+    let sql =
+      'SELECT `itemID`, `itemType`, `YeOldePrice`, `currentQuantity`, `Items`.`supplierID` AS "supplierID", `Suppliers`.`supplierName` AS "supplierName"  FROM `Items` LEFT JOIN `Suppliers` ON `Items`.`supplierID` = `Suppliers`.`supplierID` WHERE `itemID` = ' +
+      req.params.itemId;
+    let query = mysql.pool.query(sql, (err, results) => {
+      if (err) {
+        next(err);
+        return;
+      }
+      context.item = results;
+
+      let sql2 = 'SELECT `supplierID`, `supplierName` FROM `Suppliers`';
+      mysql.pool.query(sql2, (err, results) => {
+        if (err) {
+          next(err);
+          return;
+        }
+
+        context.suppliers = results;
+      });
+      console.log(context.suppliers);
+      res.render('editItem', context);
+    });
+  })
+  .put((req, res) => {
+    mysql.pool.query(
+      'UPDATE `Items` (`itemType`, `supplierID`, `YeOldePrice`, `currentQuantity`) SET (?,?,?,?) WHERE itemID = ' +
+        req.params.itemId,
+      [req.body.item, req.body.s_id, req.body.price, req.body.quantity],
+      (err) => {
+        if (err) {
+          next(err);
+          return;
+        }
+      }
+    );
+    res.redirect('items');
+  });
+
+itemRouter.route('/delete/:itemId').get((req, res) => {
+  let sql = 'DELETE FROM `Items` WHERE itemID = ' + req.params.itemId;
+  mysql.pool.query(sql, (err) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.redirect('../../items');
+  });
+});
 
 module.exports = itemRouter;

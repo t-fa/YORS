@@ -12,10 +12,11 @@
 <!-- This form will submit to the GET route update, and will display the current values,
     allowing the user to pick what entries they'd like to update -->
 <form action="post">
+    {{#each item}}
     <fieldset>
         <div class="form-group row">
             <label class="col">Edit item description:
-                <input class="form-control" type="text" name="itemType" size="40" value={{ item.itemType }}>
+                <input class="form-control" type="text" name="itemType" size="40" value="{{ itemType }}">
             </label>
             <label class="col">Edit supplier:
                 <select class="form-control" name="s_id">
@@ -29,19 +30,21 @@
                     </option>
                     {{/if}}
                     {{/each}}
+                </select>
             </label>
         </div>
         <div class="form-group row">
             <label class="col">Edit Ye Olde Price:
                 <input required class="form-control" type="text" inputmode="numeric" step="0.01" min="0" size="40"
-                    name="price" value={{ item.YeOldePrice }}>
+                    name="price" value={{ YeOldePrice }}>
             </label>
             <label class="col">Edit quantity:
-                <input class="form-control" type="number" name="quantity" size="40" min="0"
-                    value={{ item.currentQuantity }} required>
+                <input class="form-control" type="number" name="quantity" size="40" min="0" value={{ currentQuantity }}
+                    required>
             </label>
         </div>
         <input type="submit" class="btn btn-primary" value="Update Item">
-        <input type="button" class="btn btn-danger" value="Cancel" onClick="location.href='items'"></button>
+        <a href="/items"><input type="button" class="btn btn-danger" value="Cancel"></a>
     </fieldset>
+    {{/each}}
 </form>

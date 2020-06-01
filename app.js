@@ -35,9 +35,6 @@ app.use('/customers', customerRouter);
 //Orders
 app.use('/orders', orderRouter);
 
-//Edit Orders
-app.get('/editItem', (req, res) => res.render('editItem'));
-
 //Items
 app.use('/items', itemRouter);
 

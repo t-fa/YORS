@@ -63,13 +63,14 @@
                 <td>{{ this.itemType }}</td>
                 <td>
                     {{#if this.supplierID}}
-                     {{ this.supplierName }} ({{ this.supplierID }})
+                    {{ this.supplierName }} ({{ this.supplierID }})
                     {{else}}NULL
                     {{/if}}</td>
                 <td>{{ this.YeOldePrice }}</td>
                 <td>{{ this.currentQuantity }}</td>
-                <td><input type="button" class="btn btn-info" value="Edit" onClick="location.href='editItem'"></td>
-                <td><button class="btn btn-info">Delete</button></td>
+                <td><a href="/items/{{this.itemID}}"><input type=" button" class="btn btn-info" value="Edit"></a>
+                </td>
+                <td><a href="/items/delete/{{this.itemID}}"><button class="btn btn-info">Delete</button></a></td>
             </tr>
             {{/each}}
 
