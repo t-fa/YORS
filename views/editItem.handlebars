@@ -11,7 +11,7 @@
 
 <!-- This form will submit to the GET route update, and will display the current values,
     allowing the user to pick what entries they'd like to update -->
-<form action="post">
+<form method="post">
     {{#each item}}
     <fieldset>
         <div class="form-group row">
@@ -20,7 +20,7 @@
             </label>
             <label class="col">Edit supplier:
                 <select class="form-control" name="s_id">
-                    <option value="{{ item.supplierID }}" SELECTED>{{ item.supplierID }}, {{ item.supplierName }}
+                    <option value="{{ supplierID }}" SELECTED>{{ supplierID }}, {{ supplierName }}
                     </option>
                     <option value="NULL">NULL</option>
                     {{#each suppliers}}

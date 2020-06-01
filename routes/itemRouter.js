@@ -70,7 +70,7 @@ itemRouter
     let sql =
       'SELECT `itemID`, `itemType`, `YeOldePrice`, `currentQuantity`, `Items`.`supplierID` AS "supplierID", `Suppliers`.`supplierName` AS "supplierName"  FROM `Items` LEFT JOIN `Suppliers` ON `Items`.`supplierID` = `Suppliers`.`supplierID` WHERE `itemID` = ' +
       req.params.itemId;
-    let query = mysql.pool.query(sql, (err, results) => {
+    mysql.pool.query(sql, (err, results) => {
       if (err) {
         next(err);
         return;
@@ -83,18 +83,19 @@ itemRouter
           next(err);
           return;
         }
+        console.log(results);
 
         context.suppliers = results;
       });
-      console.log(context.suppliers);
       res.render('editItem', context);
     });
   })
-  .put((req, res) => {
+  .post((req, res) => {
     mysql.pool.query(
-      'UPDATE `Items` (`itemType`, `supplierID`, `YeOldePrice`, `currentQuantity`) SET (?,?,?,?) WHERE itemID = ' +
-        req.params.itemId,
-      [req.body.item, req.body.s_id, req.body.price, req.body.quantity],
+      `UPDATE \`Items\` SET \`itemType\` = ${req.body.itemType}, 
+      \`supplierID\` = ${req.body.s_id}, \`YeOldePrice\` =  ${req.body.price}, 
+      \`currentQuantity\` = ${req.body.quantity} 
+      WHERE itemID = ${req.params.itemId}`,
       (err) => {
         if (err) {
           next(err);
