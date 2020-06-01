@@ -9,30 +9,32 @@
 <h1>Add an item:</h1>
 <section>
     <form method="post">
-        <div class="form-group">
-            <label>Enter item description:
+        <div class="form-group row">
+            <label class="col">Enter item description:
                 <input class="form-control" type="text" name="item" required>
             </label>
-            <label>Select supplier: (optional)
-                <select class="custom-select" name="s_id">
+            <label class="col">Select supplier: (optional)
+                <select class="form-control" name="s_id">
                     <option value="NULL" SELECTED>NULL</option>
                     {{#each suppliers}}
-                        {{#if this.supplierID}}
-                            <option value = "{{this.supplierID}}">
-                                {{ this.supplierID }}, {{ this.supplierName }}
-                            </option>
-                        {{/if}} 
+                    {{#if this.supplierID}}
+                    <option value="{{this.supplierID}}">
+                        {{ this.supplierID }}, {{ this.supplierName }}
+                    </option>
+                    {{/if}}
                     {{/each}}
                 </select>
             </label>
-            <label>Enter Ye Olde Price:
+        </div>
+        <div class="form-group row">
+            <label class="col">Enter Ye Olde Price:
                 <input class="form-control" type="number" step="0.01" min=0 size="40" name="price" required>
             </label>
-            <label>Enter number in stock:
+            <label class="col">Enter number in stock:
                 <input class="form-control" type="number" name="quantity" size="40" min="0" required>
             </label>
-            <input type="submit" class="btn btn-primary" value="Add Item" name="addItem">
         </div>
+        <input type="submit" class="btn btn-primary" value="Add Item" name="addItem">
     </form>
 </section>
 
@@ -62,12 +64,12 @@
                 <td>{{ this.itemType }}</td>
                 <td>
                     {{#if this.supplierID}}
-                        {{ this.supplierID }}
+                    {{ this.supplierID }}
                     {{else}}NULL
                     {{/if}}</td>
                 <td>
                     {{#if this.supplierName}}
-                        {{ this.supplierName }}
+                    {{ this.supplierName }}
                     {{else}}NULL
                     {{/if}}</td>
                 <td>{{ this.YeOldePrice }}</td>
@@ -76,7 +78,7 @@
                 <td><button class="btn btn-info">Delete</button></td>
             </tr>
             {{/each}}
-                           
+
         </tbody>
     </table>
 </section>

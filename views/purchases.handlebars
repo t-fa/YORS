@@ -9,19 +9,20 @@
 <h1>Add a new purchase:</h1>
 <section>
     <form method="post">
-        <div class="form-group">
-            <label for="customerID">Select customer:
-                <select class="custom-select" name="customerID">
+        <div class="form-group row">
+            <label class="col" for="customerID">Select customer:
+                <select class="form-control" name="customerID">
                     {{#each customers}}
-                    <option value = "{{this.customerID}}">{{ this.customerID }}, {{ this.customerFirstName }} {{ this.customerLastName }}</option>
+                    <option value="{{this.customerID}}">{{ this.customerID }}, {{ this.customerFirstName }}
+                        {{ this.customerLastName }}</option>
                     {{/each}}
                 </select>
             </label>
-            <label>Enter Date of Purchase:
+            <label class="col">Enter Date of Purchase:
                 <input class="form-control" type="date" name="purchaseDate" size="40" required />
             </label>
-            <input type="submit" class="btn btn-primary" value="Add Purchase" name="addPurchase" />
         </div>
+        <input type="submit" class="btn btn-primary" value="Add Purchase" name="addPurchase" />
     </form>
 </section>
 
@@ -58,7 +59,7 @@
 <h2>Note:</h2>
 <section>
     Since the program requirements only require one M:M relationship to be implemented. The M:M relationship between
-    the Purchases entity and the Items entity is not implemented.  If it had been implemented, the employee would be 
-    able to add what items they bought from the customer.  As such, the employee can only document that a purchase 
+    the Purchases entity and the Items entity is not implemented. If it had been implemented, the employee would be
+    able to add what items they bought from the customer. As such, the employee can only document that a purchase
     was made with the customer and the date.
 </section>

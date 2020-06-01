@@ -13,30 +13,35 @@
     allowing the user to pick what entries they'd like to update -->
 <form action="post">
     <fieldset>
-        <div class="form-group">
-            <label>Edit item description:
-                <input class="form-control" type="text" name="itemType" size="40" value = {{ item.itemType }}>
+        <div class="form-group row">
+            <label class="col">Edit item description:
+                <input class="form-control" type="text" name="itemType" size="40" value={{ item.itemType }}>
             </label>
-            <label>Edit supplier:
-                <select class="custom-select" name="s_id">
-                    <option value = "{{ item.supplierID }}" SELECTED>{{ item.supplierID }}, {{ item.supplierName }}</option>
+            <label class="col">Edit supplier:
+                <select class="form-control" name="s_id">
+                    <option value="{{ item.supplierID }}" SELECTED>{{ item.supplierID }}, {{ item.supplierName }}
+                    </option>
                     <option value="NULL">NULL</option>
                     {{#each suppliers}}
-                        {{#if this.supplierID}} 
-                            <option value = "{{this.supplierID}}">
-                                {{ this.supplierID }}, {{ this.supplierName }}
-                            </option>
-                        {{/if}} 
+                    {{#if this.supplierID}}
+                    <option value="{{this.supplierID}}">
+                        {{ this.supplierID }}, {{ this.supplierName }}
+                    </option>
+                    {{/if}}
                     {{/each}}
             </label>
-            <label>Edit Ye Olde Price:
-                <input class="form-control" type="text" inputmode="numeric" step="0.01" min=0 size="40" name="price" value = {{ item.YeOldePrice }} required>
-            </label>
-            <label>Edit quantity:
-                <input class="form-control" type="number" name="quantity" size="40" min="0" value = {{ item.currentQuantity }} required>
-            </label>
-            <input type="submit" class="btn btn-primary" value="Update Item">
-            <input type="button" class="btn btn-danger" value="Cancel" onClick="location.href='items'"></button>
         </div>
+        <div class="form-group row">
+            <label class="col">Edit Ye Olde Price:
+                <input required class="form-control" type="text" inputmode="numeric" step="0.01" min="0" size="40"
+                    name="price" value={{ item.YeOldePrice }}>
+            </label>
+            <label class="col">Edit quantity:
+                <input class="form-control" type="number" name="quantity" size="40" min="0"
+                    value={{ item.currentQuantity }} required>
+            </label>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Update Item">
+        <input type="button" class="btn btn-danger" value="Cancel" onClick="location.href='items'"></button>
     </fieldset>
 </form>
