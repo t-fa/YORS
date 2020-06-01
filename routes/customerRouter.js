@@ -13,7 +13,23 @@ customerRouter
 
     let sql =
       'SELECT `customerID`, `customerFirstName`, `customerLastName`, `customerPlanet` FROM `Customers`';
-    let query = mysql.pool.query(sql, (err, result) => {
+
+    if (req.query.filterFirstName !== '' && req.query.filterLastName !== '') {
+      sql +=
+        " WHERE `customerFirstName` = '" +
+        req.query.filterFirstName +
+        "'" +
+        " AND `customerLastName` = '" +
+        req.query.filterLastName +
+        "'";
+    }
+    if (req.query.filterPlanet !== '') {
+      sql += " WHERE `customerPlanet` = '" + req.query.filterPlanet + "'";
+    }
+
+    console.log(sql);
+
+    mysql.pool.query(sql, (err, result) => {
       if (err) {
         next(err);
         return;
@@ -21,17 +37,7 @@ customerRouter
 
       context.customers = result;
 
-      let sql2 = 
-        'SELECT DISTINCT `customerPlanet` FROM `Customers`';
-      mysql.pool.query(sql2, (err, result) => {
-        if (err) {
-          next(err);
-          return;
-        }
-
-        context.planets = result;
-        res.render('customers', context);
-      });
+      res.render('customers', context);
     });
   })
   .post((req, res, next) => {

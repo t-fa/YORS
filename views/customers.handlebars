@@ -38,23 +38,25 @@
 <!-- SQL SELECT query for the Customers Entity displayed in a table -->
 <h1>Current Customers:</h1>
 
-<form>
+<form method="GET">
+    <h3>Filter Search Results</h3>
     <div class="form-group row">
-        <div class="col">
-            <label class="col">View Selected Customers
-                <input type="text" class="form-control" placeholder="Search for names..">
-            </label>
-        </div>
-        <div class="col">
-            <label class="col">Or Filter By Planet
-                <select class="col form-control">
-                    {{#each planets}}
-                    <option>{{ this.customerPlanet }}</option>
-                    {{/each}}
-                </select>
-            </label>
-        </div>
+        <label class="col">First Name
+            <input type="text" class="form-control" name="filterFirstName" placeholder="First Name">
+        </label>
+        <label class="col">Last name
+            <input type="text" class="form-control" name="filterLastName" placeholder="Last Name">
+        </label>
+        <label class="col">Or Filter By Planet
+            <select class="col form-control" name="filterPlanet">
+                <option></option>
+                {{#each planets}}
+                <option>{{ this.customerPlanet }}</option>
+                {{/each}}
+            </select>
+        </label>
     </div>
+    <input type="submit" class="btn btn-primary mb-2" value="Submit" />
 </form>
 <section>
     <table class="table table-striped">
