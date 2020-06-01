@@ -49,8 +49,7 @@
             <tr>
                 <th>Item ID</th>
                 <th>Item</th>
-                <th>Supplier ID</th>
-                <th>Supplier Name</th>
+                <th>Supplier Name (ID)</th>
                 <th>Ye Olde Price</th>
                 <th>Number In Stock</th>
                 <th></th>
@@ -64,12 +63,7 @@
                 <td>{{ this.itemType }}</td>
                 <td>
                     {{#if this.supplierID}}
-                    {{ this.supplierID }}
-                    {{else}}NULL
-                    {{/if}}</td>
-                <td>
-                    {{#if this.supplierName}}
-                    {{ this.supplierName }}
+                     {{ this.supplierName }} ({{ this.supplierID }})
                     {{else}}NULL
                     {{/if}}</td>
                 <td>{{ this.YeOldePrice }}</td>
