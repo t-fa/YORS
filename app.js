@@ -1,12 +1,10 @@
 const express = require('express'),
-  mysql = require('./dbcon.js'), // Storing credentials in another file
   app = express(),
   handlebars = require('express-handlebars'),
   helpers = require('handlebars-helpers')(),
   path = require('path'),
   bodyParser = require('body-parser'),
   orderRouter = require('./routes/orderRouter'),
-  orderItemRounter = require('./routes/orderItemRouter'),
   customerRouter = require('./routes/customerRouter'),
   itemRouter = require('./routes/itemRouter'),
   purchaseRouter = require('./routes/purchaseRouter'),
@@ -37,9 +35,6 @@ app.use('/customers', customerRouter);
 //Orders
 app.use('/orders', orderRouter);
 
-//Order Item
-app.use('/orderItem', orderItemRounter);
-
 //Edit Orders
 app.get('/editOrder', (req, res) => res.render('editOrder'));
 
@@ -53,16 +48,16 @@ app.use('/purchases', purchaseRouter);
 app.use('/suppliers', supplierRouter);
 
 // Displays the 404 error page if the status is 404
-app.use((req,res) => {
-    res.status(404);
-    res.render('404');
+app.use((req, res) => {
+  res.status(404);
+  res.render('404');
 });
 
 // Displays the 500 error page if the status is 500
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500);
-    res.render('500');
+  console.error(err.stack);
+  res.status(500);
+  res.render('500');
 });
 
 app.listen(app.get('port'), () => {
