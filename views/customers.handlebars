@@ -1,12 +1,32 @@
 <!-- Authors: Janet Anderson and Thomas Fattah -->
-<!-- Step: 5 Draft -->
-<!-- Date: May 25, 2020 -->
+<!-- Step: 6 Draft -->
+<!-- Date: May 31, 2020 -->
 <!-- Course: CS 340 -->
 
 <!-- Title -->
 <title>Ye Olde Robot Shoppe Customers</title>
 
-<!-- SQL SELECT query for the Customers Entity-->
+<!-- SQL INSERT query for the Customers Entity-->
+<h1>Add a new customer:</h1>
+<section>
+    <form method="post">
+        <div class="form-group">
+            <label>Enter First Name:
+                <input type="text" class="form-control" name="customerFirstName" size="40" maxlength="255" required/>
+            </label>
+            <label>Enter Last Name:
+                <input type="text" class="form-control" name="customerLastName" size="40" maxlength="255" required/>
+            </label>
+            <label>Enter Planet:
+                <input type="text" class="form-control" name="customerPlanet" size="40" maxlength="255" required/>
+            </label>
+            <input type="submit" class="btn btn-primary" value="Add Customer" name="addCustomer" />
+    </form>
+</section>
+
+<br />
+
+<!-- SQL SELECT query for the Customers Entity displayed in a table -->
 <h1>Current Customers:</h1>
 
 <form>
@@ -17,10 +37,9 @@
             </label>
             <label>Or Filter By Planet
                 <select class="custom-select">
-                    <option>Earth</option>
-                    <option>Jupiter</option>
-                    <option>Ergotron V</option>
-                    <option>Machina</option>
+                    {{#each planets}}
+                    <option>{{ this.customerPlanet }}</option>
+                    {{/each}}
                 </select>
             </label>
         </div>
@@ -37,7 +56,7 @@
             </tr>
         </thead>
         <tbody>
-            {{#each results}}
+            {{#each customers}}
             <tr>
                 <td>{{ this.customerID }}</td>
                 <td>{{ this.customerFirstName }}</td>
@@ -49,20 +68,4 @@
     </table>
 </section>
 
-<br />
-<h1>Add a new customer:</h1>
-<section>
-    <form method="post">
-        <div class="form-group">
-            <label>Enter First Name:
-                <input type="text" class="form-control" name="customerFirstName" size="40" maxlength="255" />
-            </label>
-            <label>Enter Last Name:
-                <input type="text" class="form-control" name="customerLastName" size="40" maxlength="255" />
-            </label>
-            <label>Enter Planet:
-                <input type="text" class="form-control" name="customerPlanet" size="40" maxlength="255" />
-            </label>
-            <input type="submit" class="btn btn-primary" value="Add Customer" name="addCustomer" />
-    </form>
-</section>
+

@@ -1,0 +1,42 @@
+<!-- Authors: Janet Anderson and Thomas Fattah -->
+<!-- Step: 6 Draft -->
+<!-- Date: May 31, 2020 -->
+<!-- Course: CS 340 -->
+
+<title>Ye Olde Robot Shoppe Items</title>
+
+
+<h1>Edit An Item</h1>
+<br>
+
+<!-- This form will submit to the GET route update, and will display the current values,
+    allowing the user to pick what entries they'd like to update -->
+<form action="post">
+    <fieldset>
+        <div class="form-group">
+            <label>Edit item description:
+                <input class="form-control" type="text" name="itemType" size="40" value = {{ item.itemType }}>
+            </label>
+            <label>Edit supplier:
+                <select class="custom-select" name="s_id">
+                    <option value = "{{ item.supplierID }}" SELECTED>{{ item.supplierID }}, {{ item.supplierName }}</option>
+                    <option value="NULL">NULL</option>
+                    {{#each suppliers}}
+                        {{#if this.supplierID}} 
+                            <option value = "{{this.supplierID}}">
+                                {{ this.supplierID }}, {{ this.supplierName }}
+                            </option>
+                        {{/if}} 
+                    {{/each}}
+            </label>
+            <label>Edit Ye Olde Price:
+                <input class="form-control" type="text" inputmode="numeric" step="0.01" min=0 size="40" name="price" value = {{ item.YeOldePrice }} required>
+            </label>
+            <label>Edit quantity:
+                <input class="form-control" type="number" name="quantity" size="40" min="0" value = {{ item.currentQuantity }} required>
+            </label>
+            <input type="submit" class="btn btn-primary" value="Update Item">
+            <input type="button" class="btn btn-danger" value="Cancel" onClick="location.href='items'"></button>
+        </div>
+    </fieldset>
+</form>

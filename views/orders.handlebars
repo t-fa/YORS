@@ -1,35 +1,141 @@
 <!-- Authors: Janet Anderson and Thomas Fattah -->
-<!-- Step: 5 Draft -->
-<!-- Date: May 25, 2020 -->
+<!-- Step: 6 Draft -->
+<!-- Date: May 31, 2020 -->
 <!-- Course: CS 340 -->
 
 <title>Ye Olde Robot Shoppe Orders</title>
 
-<!-- SQL SELECT query for the Orders Entity & Mock Edit/Delete CRUD functionality-->
-<h1>Current Orders:</h1>
+<!-- SQL INSERT query for the Orders Entity & M:M relationship for Orders and Items -->
+<h1>Add an order:</h1>
+<section>
+    <form method="post">
+        <div class="form-group">
+            <label>Select customer:
+                <select class="custom-select" name="customerID">
+                    {{#each customers}}
+                        <option value = "{{this.customerID}}">
+                            {{ this.customerID }}, {{ this.customerFirstName }} {{ this.customerLastName }}
+                        </option>
+                    {{/each}}
+                </select>
+            </label>
+            <label> Select item:
+                <select class="custom-select" name="itemID">
+                    {{#each items}}
+                        <option value = "{{this.itemID}}">
+                            {{ this.itemID }}, {{ this.itemType }}
+                        </option>
+                    {{/each}}
+                </select>
+            </label>
+            <label>Did they use galaticPay?
+                <select class="custom-select" name="galaticPay">
+                    <option value="0" SELECTED>No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </label>
+            <label>Has the order beamed?
+                <select class="custom-select" name="orderBeamed">
+                    <option value="0" SELECTED>No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
+            <label> Quantity: 
+                <input class="form-control" type="number" name="quantity" size="40" min="1" value="1" required>
+            </label>
+            <label>Enter orderDate:
+                <input type="date" class="form-control" type="date" name="orderDate" size="60" required>
+            </label>
+            <input type="submit" class="btn btn-primary" value="Add Order" name="addOrder">
+        </div>
+    </form>
+</section>
+
+<br>
+
+<!-- SQL INSERT query for adding an item to an order -->
+<h1>Add an item to an existing order:</h1>
+<section>
+    <form method="post">
+        <div class="form-group">
+            <label>Enter orderID:
+                <select class="custom-select" name="orderID">
+                    {{#each oIDs}}
+                        <option value = "{{this.orderID}}">
+                            {{ this.orderID }}
+                        </option>
+                    {{/each}}
+                </select>
+            </label>
+            <label>Enter itemID:
+                <select class="custom-select" name="itemID">
+                    {{#each items}}
+                        <option value = "{{this.itemID}}">
+                            {{ this.itemID }}, {{ this.itemType }}
+                        </option>
+                    {{/each}}
+                </select>
+            </label>
+            <label>Enter quantity:
+                <input class="form-control" type="number" name="quantity" size="40" min="1" required>
+            </label>
+            <input type="submit" class="btn btn-primary" value="Add Item to Order" name="addItemToOrder">
+        </div>
+    </form>
+</section>
+
+<br>
+
+<!-- SQL SELECT query for the Orders Entity to be displayed in a table with some 
+    customer information.  SQL Edit/Delete CRUD functionality included in the table.-->
+<h1>Current Orders and Items Ordered:</h1>
 <section>
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
                 <th>Order ID</th>
-                <th>Customer ID</th>
+                <th>Customer Name (ID)</th>
                 <th>Date of Order</th>
-                <th>galacticPay</th>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>galacticPay?</th>
                 <th>Order Beamed?</th>
-                <th></th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            {{#each results}}
+            {{#each orders}}
             <tr>
-                <td>{{ this.orderID }}</td>
-                <td>{{ this.customerID }}</td>
-                <td>{{ this.orderDate }}</td>
-                <td>{{ this.galacticPay }}</td>
-                <td>{{ this.orderBeamed }}</td>
-                <td><input type="button" class="btn btn-info" value="Edit" onClick="location.href='editOrder'"></td>
-                <td> <button class="btn btn-info">Delete</button></td>
+                <td id="itemID" style="display:none">{{ this.itemID }}</td> <!-- Keeping the item ID hidden, will be used for delete -->
+                <td id="orderID">{{ this.orderID }}</td>
+                <td>{{ this.customerFirstName }} {{this.customerLastName}} ({{ this.customerID }})</td>
+                <td>{{moment this.orderDate format="YYYY-MM-DD" }}</td>
+                <td>{{#if this.itemType}}
+                        {{ this.itemType }}
+                    {{else}} NULL
+                    {{/if}}    
+                </td>
+                <td>{{#if this.quantity }}
+                        {{ this.quantity }}
+                    {{else}} NULL
+                    {{/if}}   
+                </td>
+                <td>{{#if this.galaticPay}}
+                    Yes
+                    {{else}}No
+                    {{/if}}
+                </td>
+                <td>{{#if this.orderBeamed}}
+                    Yes
+                    {{else}}No
+                    {{/if}}
+                </td>
+                <td>{{#if this.itemID}} 
+                    <button class="btn btn-info" name="deleteOrderItem">Delete Item</button>
+                    {{/if}}
+                </td>
             </tr>
             {{/each}}
         </tbody>
@@ -37,38 +143,11 @@
 </section>
 
 <br>
-
-<h1>Add an order:</h1>
+<h2>Note:</h2>
 <section>
-    <form method="post">
-        <div class="form-group">
-            <label>Enter customerID:
-                <select class="custom-select" name="customerID">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-            </label>
-            <label>Please select the correct value for orderBeamed:
-                <select class="custom-select" name="orderBeamed">
-                    <option value="0">No</option>
-                    <option value="1">Yes</option>
-                </select>
-            </label>
-        </div>
-        
-        <div class="form-group">
-            <label>Enter orderDate:
-                <input type="date" class="form-control" type="date" name="orderDate" size="60" min="2020-01-01"
-                    max="2020-12-31">
-            </label>
-            <label>Enter galacticPay:
-                <input class="form-control" type="text" inputmode="numeric" pattern="[0-9]*" name="galaticPay"
-                    maxlength="20" minlength="20" placeholder="12345678951321564879">
-            </label>
-        </div>
-        <input type="submit" class="btn btn-primary" value="Add Order" name="addOrder">
-    </form>
+    It is possible for Item/Quantity to be NULL.  While every order must have an item, when an item is deleted,
+    the database will delete every entry from the OrderItem M:M relationship table.  If an order only contains 
+    one item and that item is deleted, then the Order will still appear in the table above, but the Item and 
+    Quantity fields will be NULL.  The delete option will not be available to entries where there is no Item ID
+    since the delete functionality is to delete an item from an order without deleting the Order itself.
 </section>

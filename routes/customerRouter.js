@@ -9,14 +9,29 @@ customerRouter.use(bodyParser.json());
 customerRouter
   .route('/')
   .get((req, res, next) => {
+    let context = {};
+
     let sql =
       'SELECT `customerID`, `customerFirstName`, `customerLastName`, `customerPlanet` FROM `Customers`';
-    let query = mysql.pool.query(sql, (err, results) => {
+    let query = mysql.pool.query(sql, (err, result) => {
       if (err) {
         next(err);
         return;
       }
-      res.render('customers', { results: results });
+
+      context.customers = result;
+
+      let sql2 = 
+        'SELECT DISTINCT `customerPlanet` FROM `Customers`';
+      mysql.pool.query(sql2, (err, result) => {
+        if (err) {
+          next(err);
+          return;
+        }
+
+        context.planets = result;
+        res.render('customers', context);
+      });
     });
   })
   .post((req, res, next) => {

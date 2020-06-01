@@ -31,7 +31,7 @@ CREATE TABLE `Orders` (
   `orderID` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `customerID` int(11) NOT NULL,
   `orderDate` date NOT NULL,
-  `galacticPay` varchar(20) NOT NULL,
+  `galacticPay` boolean NOT NULL,
   `orderBeamed` boolean NOT NULL,
   CONSTRAINT `orders_fk_1` FOREIGN KEY (`customerID`) REFERENCES `Customers` (`customerID`) ON DELETE CASCADE
 ) ENGINE=INNODB DEFAULT CHARSET=latin1;
@@ -111,11 +111,11 @@ INSERT INTO `Customers` (`customerFirstName`, `customerLastName`, `customerPlane
 --
 -- Sample data for table `Orders`
 --
-INSERT INTO `Orders` (`customerID`, `orderDate`, `galacticPay`, `orderBeamed`) VALUES ('1', '2020-01-01', '01234567890123456789', '1');
-INSERT INTO `Orders` (`customerID`, `orderDate`, `galacticPay`, `orderBeamed`) VALUES ('2', '2020-01-01', '98765432109876543210', '1');
-INSERT INTO `Orders` (`customerID`, `orderDate`, `galacticPay`, `orderBeamed`) VALUES ('3', '2020-01-02', '12345678901234567890', '1');
-INSERT INTO `Orders` (`customerID`, `orderDate`, `galacticPay`, `orderBeamed`) VALUES ('1', '2020-01-03', '01234567890123456789', '0');
-INSERT INTO `Orders` (`customerID`, `orderDate`, `galacticPay`, `orderBeamed`) VALUES ('4', '2020-01-04', '23456789012345678901', '0');
+INSERT INTO `Orders` (`customerID`, `orderDate`, `galacticPay`, `orderBeamed`) VALUES ('1', '2020-01-01', '1', '1');
+INSERT INTO `Orders` (`customerID`, `orderDate`, `galacticPay`, `orderBeamed`) VALUES ('2', '2020-01-01', '0', '1');
+INSERT INTO `Orders` (`customerID`, `orderDate`, `galacticPay`, `orderBeamed`) VALUES ('3', '2020-01-02', '0', '1');
+INSERT INTO `Orders` (`customerID`, `orderDate`, `galacticPay`, `orderBeamed`) VALUES ('1', '2020-01-03', '1', '0');
+INSERT INTO `Orders` (`customerID`, `orderDate`, `galacticPay`, `orderBeamed`) VALUES ('4', '2020-01-04', '1', '0');
 
 
 --

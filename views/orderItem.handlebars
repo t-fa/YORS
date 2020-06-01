@@ -1,64 +1,10 @@
 <!-- Authors: Janet Anderson and Thomas Fattah -->
-<!-- Step: 5 Draft -->
-<!-- Date: May 25, 2020 -->
+<!-- Step: 6 Draft -->
+<!-- Date: May 31, 2020 -->
 <!-- Course: CS 340 -->
 
 <!-- Title -->
-<title>Ye Olde Robot Shoppe OrderItem</title>
+<title>To Be Removed</title>
 
-<!-- SQL SELECT query for the orderItem Entity & Mock Delete CRUD functionality-->
-<h1>Current Order Numbers and Items:</h1>
-<section>
-    <table class="table table-striped">
-        <thead class="thead-dark">
-            <tr>
-                <th>Order ID</th>
-                <th>Item ID</th>
-                <th>Quantity</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each results}}
-            <tr>
-                <td>{{ this.orderID }}</td>
-                <td>{{ this.itemID }}</td>
-                <td>{{ this.quantity }}</td>
-                <td> <button class="btn btn-info">Delete</button></td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
-</section>
 
-<br>
-
-<h1>Add an item to an order:</h1>
-<section>
-    <form method="post">
-        <div class="form-group">
-            <label>Enter orderID:
-                <select class="custom-select" name="orderID">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-            </label>
-            <label>Enter itemID:
-                <select class="custom-select" name="itemID">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-            </label>
-            <label>Enter quantity:
-                <input class="form-control" type="number" name="quantity" size="40" min="1">
-            </label>
-        </div>
-        <input type="submit" class="btn btn-primary" value="Add Item to Order" name="addItemToOrder">
-    </form>
-</section>
+<h1>This page is to be removed.  OrderItem was integrated into the Orders page.</h1>

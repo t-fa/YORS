@@ -1,12 +1,30 @@
 <!-- Authors: Janet Anderson and Thomas Fattah -->
-<!-- Step: 5 Draft -->
-<!-- Date: May 25, 2020 -->
+<!-- Step: 6 Draft -->
+<!-- Date: May 31, 2020 -->
 <!-- Course: CS 340 -->
 
 <!-- Title -->
 <title>Ye Olde Robot Shoppe Suppliers</title>
 
-<!-- Mock SQL query and CRUD functions for the orders Entity-->
+<!-- SQL INSERT query for the Suppliers Entity-->
+<h1>Add a new supplier:</h1>
+<section>
+    <form method="post">
+        <div class="form-group">
+            <label>Enter Supplier Name:
+                <input class="form-control" type="text" name="name" size="40" maxlength="255" required/>
+            </label>
+            <label>Enter Supplier Planet:
+                <input class="form-control" type="text" name="planet" size="40" maxlength="255" required/>
+            </label>
+            <input type="submit" class="btn btn-primary" value="Add Supplier" name="addSupplier" required/>
+        </div>
+    </form>
+</section>
+
+<br>
+
+<!-- SQL SELECT query for the Suppliers Entity displayed in a table -->
 <h1>Current Suppliers:</h1>
 <section>
     <table class="table table-striped">
@@ -27,21 +45,4 @@
             {{/each}}
         </tbody>
     </table>
-</section>
-
-<br>
-
-<h1>Add a new supplier:</h1>
-<section>
-    <form method="post">
-        <div class="form-group">
-            <label>Enter Supplier Name:
-                <input class="form-control" type="text" name="name" size="40" maxlength="255" />
-            </label>
-            <label>Enter Supplier Planet:
-                <input class="form-control" type="text" name="planet" size="40" maxlength="255" />
-            </label>
-            <input type="submit" class="btn btn-primary" value="Add Supplier" name="addSupplier" />
-        </div>
-    </form>
 </section>
