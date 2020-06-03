@@ -110,8 +110,8 @@
         <tbody>
             {{#each orders}}
             <tr>
-                <td id="itemID" style="display:none">{{ this.itemID }}</td>
                 <!-- Keeping the item ID hidden, will be used for delete -->
+                <td id="itemID" style="display:none">{{ this.itemID }}</td>
                 <td id="orderID">{{ this.orderID }}</td>
                 <td>{{ this.customerFirstName }} {{this.customerLastName}} ({{ this.customerID }})</td>
                 <td>{{moment this.orderDate format="YYYY-MM-DD" }}</td>
@@ -136,7 +136,8 @@
                     {{/if}}
                 </td>
                 <td>{{#if this.itemID}}
-                    <button class="btn btn-info" name="deleteOrderItem">Delete Item</button>
+                    <a href = '/orders/delete/{{this.orderID}}/{{this.itemID}}/'
+                    <button class="btn btn-info" name="deleteOrderItem">Delete Item</button></a>
                     {{/if}}
                 </td>
             </tr>

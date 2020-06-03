@@ -156,3 +156,5 @@ INSERT INTO `OrderItem` (`OrderID`, `itemID`, `quantity`) VALUES ('1', '2', '1')
 INSERT INTO `OrderItem` (`OrderID`, `itemID`, `quantity`) VALUES ('2', '3', '4');
 INSERT INTO `OrderItem` (`OrderID`, `itemID`, `quantity`) VALUES ('3', '1', '3');
 INSERT INTO `OrderItem` (`OrderID`, `itemID`, `quantity`) VALUES ('3', '4', '2');
+INSERT INTO `OrderItem` (`OrderID`, `itemID`, `quantity`) VALUES ('4', '5', '7');
+INSERT INTO `OrderItem` (`OrderID`, `itemID`, `quantity`) VALUES ('5', '4', '4');

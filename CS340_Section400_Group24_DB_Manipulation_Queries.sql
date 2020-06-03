@@ -15,18 +15,32 @@
 SELECT `customerID`, `customerFirstName`, `customerLastName`, `customerPlanet` FROM `Customers`;
 
 -- Get the planets currently in the database to perform a filter based on planet name
-SELECT DISTINCT `customerPlanet` FROM `Customers`;
+SELECT DISTINCT `customerPlanet` FROM `Customers` ORDER BY `customerPlanet` ASC;
 
--- The search for names portion is planned to be a JavaScript function that will hide rows as needed, but
--- the dropdown selection will activate a SELECT query to re-display the table.
--- Below are the queries based on which option the user selects from the drop-down options.
-SELECT `customerID`, `customerFirstName`, `customerLastName`, `customerPlanet` FROM `Customers` WHERE `customerPlanet` = 'Earth';
+-- The search filters will search for customers by first name, last name, or first and last name.
+-- Below are the queries based on which option the user enters in the first and/or last name search box.
+-- First name only
+SELECT `customerID`, `customerFirstName`, `customerLastName`, `customerPlanet` FROM `Customers` 
+WHERE `customerFirstName` LIKE '% :userFirstNameInput %'; 
 
+-- Last name only
+SELECT `customerID`, `customerFirstName`, `customerLastName`, `customerPlanet` FROM `Customers` 
+WHERE `customerLastName` LIKE '% :userLastNameInput %'; 
+
+-- First and last name
+SELECT `customerID`, `customerFirstName`, `customerLastName`, `customerPlanet` FROM `Customers` 
+WHERE `customerFirstName` LIKE '% :userFirstNameInput %' AND `customerLastName` LIKE '% :userLastNameInput %'; 
+
+-- Filtering option that will filter the customer results based on the customer's planet.
+-- Below are the queries based on which option the user selects from the drop-down options,
+-- which are dynamically populated by the query above to get the DISTINCT customer planets
+SELECT `customerID`, `customerFirstName`, `customerLastName`, `customerPlanet` FROM `Customers` 
+WHERE `customerPlanet` = :customerPlanetSelection;
 
 -- Query to insert a new customer functionality with colon : character being used to
 -- denote the variables that will have data passed from the front end
 INSERT INTO `Customers` (`customerFirstName`, `customerLastName`, `customerPlanet`) 
-VALUES (:customerFirstNameInput, :customerLastNameInput, :customerPlanetInput);
+VALUES (:customerFirstNameInput, :customerLastNameInput, :customerPlanetSelection);
 
 
 -- ------------------------------------------------------
@@ -43,20 +57,20 @@ LEFT JOIN `Items` ON `OrderItem`.`itemID` = `Items`.`itemID`;
 
 -- Get the customerID, customerFirstName, and customerLastName currently in the database to create a 
 -- dynamically populated drop down menu for INSERT form
-SELECT `customerID`, `customerFirstName`, `customerLastName` FROM `Customers`;
+SELECT `customerID`, `customerFirstName`, `customerLastName` FROM `Customers` ORDER BY `customerID` ASC;
 
 -- Get the itemID and itemType currently in the database to create a dynamically populated drop down 
 -- menu for INSERT form
-SELECT `itemID`, `itemType` FROM `Items`;
+SELECT `itemID`, `itemType` FROM `Items` ORDER BY `itemID` ASC;
 
 -- Get the orderIDs currently in the database to create a dynamically populated drop down menu for 
 -- INSERT form
-SELECT `orderID` FROM `Orders`;
+SELECT `orderID` FROM `Orders` ORDER BY `orderID` ASC;
 
 -- Query to insert a new order functionality with colon : character being used to
 -- denote the variables that will have data passed from the front end
-INSERT INTO `Orders` (`customerID`, `orderDate`, `galacticPay`, `orderBeamed`) 
-VALUES (:customerIDSelectionChoice, :orderDateInput, :galacticPayInput, :orderBeamedSelection);
+INSERT INTO `Orders` (`customerID`,  `orderBeamed`, `orderDate`, `galacticPay`) 
+VALUES (:customerIDSelection, :orderBeamedSelection, :orderDateInput, :galacticPaySelection);
 
 -- Query to insert an item with a new order functionality with colon : character being used to
 -- denote the variables that will have data passed from the front end
@@ -77,17 +91,20 @@ SELECT `itemID`, `itemType`, `YeOldePrice`, `currentQuantity`, `Items`.`supplier
 LEFT JOIN `Suppliers` ON `Items`.`supplierID` = `Suppliers`.`supplierID`;
 
 -- Get the supplierID and supplierName currently in the database to create a dynamically populated 
-SELECT `supplierID`, `supplierName` FROM `Suppliers`;
+SELECT `supplierID`, `supplierName` FROM `Suppliers` ORDER BY `supplierID` ASC;
 
 -- Query to insert a new item functionality (supplierID != NULL) with colon : character being used to
 -- denote the variables that will have data passed from the front end
 INSERT INTO `Items` (`itemType`, `supplierID`, `YeOldePrice`, `currentQuantity`) 
-VALUES (:itemType, :supplierID, :YeOldePrice, :currentQuantity);
+VALUES (:itemTypeInput, :supplierIDSelection, :YeOldePriceInput, :currentQuantityInput);
 
 -- Query to insert a new item functionality (supplierID == NULL) with colon : character being used to
 -- denote the variables that will have data passed from the front end
 INSERT INTO `Items` (`itemType`, `YeOldePrice`, `currentQuantity`) 
-VALUES (:itemType, :YeOldePrice, :currentQuantity);
+VALUES (:itemTypeInput, :YeOldePriceInput, :currentQuantityInput);
+
+-- Query to get the information for the item that the user selects to update
+
 
 -- Query to update an order functionality with colon : character being used to 
 -- denote the variables that will have data passed from the front end
@@ -101,21 +118,6 @@ WHERE `itemID` = :itemIDSelected;
 -- denote the variables that will have data passed from the front end
 DELETE FROM `Items` WHERE `itemID` = :itemIDSelected;
 
--- ------------------------------------------------------
--- For the OrderItem webpage, the SELECT and INSERT CRUD functionalities are needed.
-
--- Get the orderID, itemID, and quantity to be displayed in a table
-SELECT `orderID`, `itemID`, `quantity` FROM `OrderItem`;
-
--- Query to insert an item into an order functionality with colon : character being used to
--- denote the variables that will have data passed from the front end
-INSERT INTO `OrderItem` (`orderID`, `itemID`, `quantity`) VALUES (:orderID, :itemID, :quantity);
-
--- Query to delete an item from an order functionality with colon : chracter being used to 
--- denote the variables that will have data passed from the front end
-DELETE FROM `OrderItem` WHERE `orderID` = :orderIDSelectedFromOrdersTable
-AND `itemID` = :itemIDSelectedFromOrdersTable;
-
 
 -- ------------------------------------------------------
 -- For the Purchases webpage, the SELECT and INSERT CRUD functionalities are needed.
@@ -128,11 +130,11 @@ SELECT `purchaseID`, `purchaseDate`, `Purchases`.`customerID` AS "customerID",
 LEFT JOIN `Customers` ON `Purchases`.`customerID`=`Customers`.`customerID`;
 
 -- Get the customer information to add a new purchase
-SELECT `customerID`, `customerFirstName`, `customerLastName` FROM `Customers`;
+SELECT `customerID`, `customerFirstName`, `customerLastName` FROM `Customers` ORDER BY `customerID` ASC;
 
 -- Query to insert a new purchase functionality with colon : character being used to
 -- denote the variables that will have data passed from the front end
-INSERT INTO `Purchases` (`purchaseDate`, `customerID`) VALUES (:purchaseDate, :customerID);
+INSERT INTO `Purchases` (`purchaseDate`, `customerID`) VALUES (:purchaseDate, :customerIDSelection);
 
 
 -- ------------------------------------------------------
@@ -143,4 +145,4 @@ SELECT `supplierID`, `supplierName`, `supplierPlanet` FROM `Suppliers`;
 
 -- Query to insert a new supplier functionality with colon : character being used to
 -- denote the variables that will have data passed from the front end
-INSERT INTO `Suppliers` (`supplierName`, `supplierPlanet`) VALUES (:supplierName, :supplierPlanet);
+INSERT INTO `Suppliers` (`supplierName`, `supplierPlanet`) VALUES (:supplierNameInput, :supplierPlanetInput);

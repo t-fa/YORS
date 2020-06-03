@@ -12,7 +12,9 @@ itemRouter
     let context = {};
 
     let sql =
-      'SELECT `itemID`, `itemType`, `YeOldePrice`, `currentQuantity`, `Items`.`supplierID` AS "supplierID", `Suppliers`.`supplierName` AS "supplierName"  FROM `Items` LEFT JOIN `Suppliers` ON `Items`.`supplierID` = `Suppliers`.`supplierID`';
+      'SELECT `itemID`, `itemType`, `YeOldePrice`, `currentQuantity`, `Items`.`supplierID` AS "supplierID",' +
+      ' `Suppliers`.`supplierName` AS "supplierName"  FROM `Items` LEFT JOIN `Suppliers` ON' +
+      ' `Items`.`supplierID` = `Suppliers`.`supplierID`';
     let query = mysql.pool.query(sql, (err, results) => {
       if (err) {
         next(err);
@@ -65,29 +67,40 @@ itemRouter
 
 itemRouter
   .route('/:itemId')
-  .get((req, res) => {
+  .get((req, res, next) => {
     let context = {};
+
     let sql =
-      'SELECT `itemID`, `itemType`, `YeOldePrice`, `currentQuantity`, `Items`.`supplierID` AS "supplierID", `Suppliers`.`supplierName` AS "supplierName"  FROM `Items` LEFT JOIN `Suppliers` ON `Items`.`supplierID` = `Suppliers`.`supplierID` WHERE `itemID` = ' +
-      req.params.itemId;
-    mysql.pool.query(sql, (err, results) => {
+    'SELECT `itemID`, `itemType`, `YeOldePrice`, `currentQuantity`, `Items`.`supplierID` AS "supplierID",' +
+    ' `Suppliers`.`supplierName` AS "supplierName"  FROM `Items` LEFT JOIN `Suppliers` ON' +
+    ' `Items`.`supplierID` = `Suppliers`.`supplierID` WHERE `itemID` = ' + req.params.itemId;
+
+    mysql.pool.query(sql, (err, result) => {
       if (err) {
         next(err);
         return;
       }
-      context.item = results;
 
-      let sql2 = 'SELECT `supplierID`, `supplierName` FROM `Suppliers`';
-      mysql.pool.query(sql2, (err, results) => {
+      context.item = result;
+
+      let sql2 = 'SELECT `supplierID` AS "sid", `supplierName` AS "sname" FROM `Suppliers` WHERE NOT EXISTS' +
+      ' (SELECT `Items`.`supplierID` FROM `Items` LEFT JOIN `Suppliers` ON `Items`.`supplierID` = `Suppliers`.`supplierID`' +
+      ' WHERE `itemID` = ' + req.params.itemId + ' AND `Suppliers`.`supplierID` = `Items`.`supplierID`) OR supplierID' +
+      ' NOT IN (SELECT `Items`.`supplierID` FROM `Items` LEFT JOIN `Suppliers` ON' +
+      ' `Items`.`supplierID` = `Suppliers`.`supplierID` WHERE itemID = ' + req.params.itemId + ')';
+
+      console.log(sql2);
+
+      mysql.pool.query(sql2, (err, result) => {
         if (err) {
           next(err);
           return;
         }
-        console.log(results);
 
-        context.suppliers = results;
+        context.suppliers = result;
+        console.log(context);
+        res.render('editItem', context);
       });
-      res.render('editItem', context);
     });
   })
   .post((req, res) => {
@@ -105,6 +118,26 @@ itemRouter
     );
     res.redirect('items');
   });
+    /* Does not work, says syntax error at req.body
+    .put('/:editId', (req, res) => {
+    mysql.pool.query(
+      'UPDATE `Items` SET `itemType` = ?, `supplierID` = ?, `YeOldePrice` = ?, `currentQuantity` = ? WHERE `itemID` = ?', 
+      [
+        req.body.itemType,
+        req.body.s_id,
+        req.body.price,
+        req.body.quantity,
+        req.params.itemId
+      ]
+      (err) => {
+        if (err) {
+          next(err);
+          return;
+        }
+      }
+    );
+    res.redirect('items');
+  }); */
 
 itemRouter.route('/delete/:itemId').get((req, res) => {
   let sql = 'DELETE FROM `Items` WHERE itemID = ' + req.params.itemId;

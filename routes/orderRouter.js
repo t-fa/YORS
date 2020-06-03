@@ -28,7 +28,7 @@ orderRouter
       context.orders = results;
 
       //Get SELECT query for item type for dynamically populated drop down menu
-      let sql2 = 'SELECT `itemID`, `itemType` FROM `Items`';
+      let sql2 = 'SELECT `itemID`, `itemType` FROM `Items` ORDER BY `itemID` ASC';
       let query2 = mysql.pool.query(sql2, (err, results) => {
         if (err) {
           next(err);
@@ -38,7 +38,7 @@ orderRouter
         context.items = results;
 
         //Get SELECT query for customer name for dynamically populated drop down menu
-        let sql3 = 'SELECT `customerID`, `customerFirstName`, `customerLastName` FROM `Customers`';
+        let sql3 = 'SELECT `customerID`, `customerFirstName`, `customerLastName` FROM `Customers` ORDER BY `customerID` ASC';
         let query3 = mysql.pool.query(sql3, (err, results) => {
           if (err) {
             next(err);
@@ -48,7 +48,7 @@ orderRouter
           context.customers = results;
 
           //Get SELECT query for order ID for dynamically populated drop down menu
-          let sql4 = 'SELECT `orderID` FROM `Orders`';
+          let sql4 = 'SELECT `orderID` FROM `Orders` ORDER BY `orderID` ASC';
           let query4 = mysql.pool.query(sql4, (err, results) => {
             if (err) {
               next(err);
@@ -133,9 +133,20 @@ orderRouter
         }
       );
     }
-
-    //if (req.body[''])
     res.redirect('orders');
   });
+
+orderRouter.route('/delete/:orderId/:itemId').get((req,res) => {
+  let sql = 'DELETE FROM `OrderItem` WHERE `orderID` = ' +
+    req.params.orderId + ' AND `itemID` = ' + req.params.itemId;
+  
+  mysql.pool.query(sql, (err) => {
+    if (err) {
+      next(err);
+      return;
+    }
+  res.redirect('../../../../orders');
+  });
+});
 
 module.exports = orderRouter;

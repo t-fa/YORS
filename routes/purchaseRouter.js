@@ -12,7 +12,9 @@ purchaseRouter
     let context = {};
 
     let sql =
-      'SELECT `purchaseID`, `purchaseDate`, `Purchases`.`customerID` AS "customerID", `Customers`.`customerFirstName` AS "customerFirstName", `Customers`.`customerLastName` AS "customerLastName" FROM `Purchases` LEFT JOIN `Customers` ON `Purchases`.`customerID`=`Customers`.`customerID`';
+      'SELECT `purchaseID`, `purchaseDate`, `Purchases`.`customerID` AS "customerID",\
+       `Customers`.`customerFirstName` AS "customerFirstName", `Customers`.`customerLastName` AS "customerLastName"\
+        FROM `Purchases` LEFT JOIN `Customers` ON `Purchases`.`customerID`=`Customers`.`customerID`';
     let query = mysql.pool.query(sql, (err, results) => {
       if (err) {
         next(err);
@@ -21,7 +23,7 @@ purchaseRouter
 
       context.purchases = results;
 
-      let sql2 = 'SELECT `customerID`, `customerFirstName`, `customerLastName` FROM `Customers`';
+      let sql2 = 'SELECT `customerID`, `customerFirstName`, `customerLastName` FROM `Customers` ORDER BY `customerID` ASC';
       mysql.pool.query(sql2, (err,results) => {
         if (err) {
           next(err);
