@@ -76,7 +76,7 @@ orderRouter
                     req.body.customerID,
                     req.body.orderBeamed,
                     req.body.orderDate,
-                    req.body.galaticPay,
+                    req.body.galacticPay,
                 ],
                 (err, result) => {
                 if (err) { 

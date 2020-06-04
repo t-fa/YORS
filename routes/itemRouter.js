@@ -89,8 +89,6 @@ itemRouter
       ' NOT IN (SELECT `Items`.`supplierID` FROM `Items` LEFT JOIN `Suppliers` ON' +
       ' `Items`.`supplierID` = `Suppliers`.`supplierID` WHERE itemID = ' + req.params.itemId + ')';
 
-      console.log(sql2);
-
       mysql.pool.query(sql2, (err, result) => {
         if (err) {
           next(err);
@@ -103,41 +101,23 @@ itemRouter
       });
     });
   })
-  .post((req, res) => {
-    mysql.pool.query(
-      `UPDATE \`Items\` SET \`itemType\` = ${req.body.itemType}, 
-      \`supplierID\` = ${req.body.s_id}, \`YeOldePrice\` =  ${req.body.price}, 
-      \`currentQuantity\` = ${req.body.quantity} 
-      WHERE itemID = ${req.params.itemId}`,
-      (err) => {
+  .post((req, res, next) => {
+
+    if (req.body['updateItem']) {
+    console.log(req.body);
+    console.log(req.params.itemId);
+    let sql = 'UPDATE `Items` SET `itemType`=?, `supplierID`=?, `YeOldePrice`=?, `currentQuantity`=? WHERE `itemID`=?';
+    let updateValues = [req.body.itemType, req.body.s_id, req.body.price, req.body.quantity, req.params.itemId];
+    mysql.pool.query(sql, updateValues, (err) => {
         if (err) {
           next(err);
           return;
         }
       }
     );
-    res.redirect('items');
+    }
+    res.redirect('../../items');
   });
-    /* Does not work, says syntax error at req.body
-    .put('/:editId', (req, res) => {
-    mysql.pool.query(
-      'UPDATE `Items` SET `itemType` = ?, `supplierID` = ?, `YeOldePrice` = ?, `currentQuantity` = ? WHERE `itemID` = ?', 
-      [
-        req.body.itemType,
-        req.body.s_id,
-        req.body.price,
-        req.body.quantity,
-        req.params.itemId
-      ]
-      (err) => {
-        if (err) {
-          next(err);
-          return;
-        }
-      }
-    );
-    res.redirect('items');
-  }); */
 
 itemRouter.route('/delete/:itemId').get((req, res) => {
   let sql = 'DELETE FROM `Items` WHERE itemID = ' + req.params.itemId;
