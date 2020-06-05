@@ -1,3 +1,5 @@
+/* This router implements the `Purchases` entity, pulling necessary data from the `Customers`
+entity. This relationship is a 1:M relationship. */
 const express = require('express'),
   bodyParser = require('body-parser'),
   mysql = require('../dbcon.js');
@@ -11,6 +13,7 @@ purchaseRouter
   .get((req, res, next) => {
     let context = {};
 
+    // SELECT query for displaying all data in table
     let sql =
       'SELECT `purchaseID`, `purchaseDate`, `Purchases`.`customerID` AS "customerID",\
        `Customers`.`customerFirstName` AS "customerFirstName", `Customers`.`customerLastName` AS "customerLastName"\
@@ -23,8 +26,10 @@ purchaseRouter
 
       context.purchases = results;
 
-      let sql2 = 'SELECT `customerID`, `customerFirstName`, `customerLastName` FROM `Customers` ORDER BY `customerID` ASC';
-      mysql.pool.query(sql2, (err,results) => {
+      // populates dropdown menu with customers for adding a new purchase
+      let sql2 =
+        'SELECT `customerID`, `customerFirstName`, `customerLastName` FROM `Customers` ORDER BY `customerID` ASC';
+      mysql.pool.query(sql2, (err, results) => {
         if (err) {
           next(err);
           return;
@@ -32,12 +37,13 @@ purchaseRouter
 
         context.customers = results;
         res.render('purchases', context);
-      });  
+      });
     });
   })
   .post((req, res, next) => {
     if (req.body['addPurchase']) {
       mysql.pool.query(
+        // add new purchase
         'INSERT INTO `Purchases` (`purchaseDate`, `customerID`) VALUES (?,?)',
         [req.body.purchaseDate, req.body.customerID],
         (err) => {

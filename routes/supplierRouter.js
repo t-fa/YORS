@@ -1,3 +1,4 @@
+/* This router implements the `Suppliers` entity. */
 const express = require('express'),
   bodyParser = require('body-parser'),
   mysql = require('../dbcon.js');
@@ -9,6 +10,7 @@ supplierRouter.use(bodyParser.json());
 supplierRouter
   .route('/')
   .get((req, res, next) => {
+    // displays all suppliers
     let sql =
       'SELECT `supplierID`, `supplierName`, `supplierPlanet` FROM `Suppliers`';
     let query = mysql.pool.query(sql, (err, results) => {
@@ -22,6 +24,7 @@ supplierRouter
   .post((req, res, next) => {
     if (req.body['addSupplier']) {
       mysql.pool.query(
+        // add new supplier
         'INSERT INTO `Suppliers` (`supplierName`, `supplierPlanet`) VALUES (?,?)',
         [req.body.name, req.body.planet],
         (err) => {

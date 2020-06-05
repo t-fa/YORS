@@ -1,3 +1,4 @@
+/* This router implements the `Customers` entity. */
 const express = require('express'),
   bodyParser = require('body-parser'),
   mysql = require('../dbcon.js');
@@ -11,9 +12,11 @@ customerRouter
   .get((req, res, next) => {
     let context = {};
 
+    // display all customers
     let sql =
       'SELECT `customerID`, `customerFirstName`, `customerLastName`, `customerPlanet` FROM `Customers`';
 
+    // filter customers by name or planet
     if (req.query.filterFirstName && req.query.filterLastName) {
       sql +=
         " WHERE `customerFirstName` LIKE '%" +
@@ -22,23 +25,16 @@ customerRouter
         " AND `customerLastName` LIKE '%" +
         req.query.filterLastName +
         "%'";
-    }
-    else if (req.query.filterFirstName) {
+    } else if (req.query.filterFirstName) {
       sql +=
-        " WHERE `customerFirstName` LIKE '%" +
-        req.query.filterFirstName +
-        "%'";
-    }
-    else if (req.query.filterLastName) {
+        " WHERE `customerFirstName` LIKE '%" + req.query.filterFirstName + "%'";
+    } else if (req.query.filterLastName) {
       sql +=
-      " WHERE `customerLastName` LIKE '%" +
-      req.query.filterLastName +
-      "%'";
-    }
-    else if (req.query.filterPlanet) {
+        " WHERE `customerLastName` LIKE '%" + req.query.filterLastName + "%'";
+    } else if (req.query.filterPlanet) {
       sql += " WHERE `customerPlanet` = '" + req.query.filterPlanet + "'";
+    } else {
     }
-    else {}
 
     mysql.pool.query(sql, (err, result) => {
       if (err) {
@@ -48,7 +44,8 @@ customerRouter
 
       context.customers = result;
 
-      let sql2 = 'SELECT DISTINCT `customerPlanet` FROM `Customers` ORDER BY `customerPlanet` ASC';
+      let sql2 =
+        'SELECT DISTINCT `customerPlanet` FROM `Customers` ORDER BY `customerPlanet` ASC';
       mysql.pool.query(sql2, (err, result) => {
         if (err) {
           next(err);
@@ -63,6 +60,7 @@ customerRouter
   .post((req, res, next) => {
     if (req.body['addCustomer']) {
       mysql.pool.query(
+        // add new customer
         'INSERT INTO `Customers` (`customerFirstName`, `customerLastName`, `customerPlanet`) VALUES (?,?,?)',
         [
           req.body.customerFirstName,
