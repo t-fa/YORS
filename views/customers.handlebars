@@ -1,31 +1,31 @@
 <!-- Authors: Janet Anderson and Thomas Fattah -->
-<!-- Step: 6 Draft -->
-<!-- Date: May 31, 2020 -->
+<!-- Step: 7 (Final Portfolio)  -->
+<!-- Date: June 5, 2020 -->
 <!-- Course: CS 340 -->
 
 <!-- Title -->
 <title>Ye Olde Robot Shoppe Customers</title>
 
-<!-- SQL INSERT query for the Customers Entity-->
+<!--  Form for SQL INSERT query for the Customers Entity (add a new customer) -->
 <h1>Add a new customer:</h1>
 <section>
     <form method="post">
         <div class="form-group row">
             <div class="col">
                 <label class="col">Enter First Name:
-                    <input type="text" class="form-control" name="customerFirstName" required />
+                    <input type="text" class="form-control" name="customerFirstName" maxlength="255" required />
                 </label>
             </div>
             <div class="col">
                 <label class="col">Enter Last Name:
-                    <input type="text" class="form-control" name="customerLastName" required />
+                    <input type="text" class="form-control" name="customerLastName" maxlength="255" required />
                 </label>
             </div>
         </div>
         <div class="form-group row">
             <div class="col">
                 <label class="col">Enter Planet:
-                    <input type="text" class="form-control" name="customerPlanet" required />
+                    <input type="text" class="form-control" name="customerPlanet" maxlength="255" required />
                 </label>
             </div>
         </div>
@@ -35,9 +35,11 @@
 
 <br />
 
-<!-- SQL SELECT query for the Customers Entity displayed in a table -->
-<h1>Current Customers:</h1>
 
+<h1>Current Customers:</h1>
+<!-- Form that will make a request for a SQL SELECT query based on whether the user searches
+     for a customer by their first and/or last name, or if they filter the customers based on
+     a drop down selection box based on the current planets in the database.  -->
 <form method="GET">
     <h3>Filter Search Results</h3>
     <div class="form-group row">
@@ -58,6 +60,9 @@
     </div>
     <input type="submit" class="btn btn-primary mb-2" value="Submit" />
 </form>
+<!-- Table that will display the results from a SQL SELECT query for the Customers Entity.
+     It will load all customers by default and then customers based on the searching/filtering
+     that the user requests.  -->
 <section>
     <table class="table table-striped">
         <thead class="thead-dark">

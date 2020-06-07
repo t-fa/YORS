@@ -10,7 +10,7 @@ supplierRouter.use(bodyParser.json());
 supplierRouter
   .route('/')
   .get((req, res, next) => {
-    // displays all suppliers
+    // Get SQL SELECT query to display all suppliers
     let sql =
       'SELECT `supplierID`, `supplierName`, `supplierPlanet` FROM `Suppliers`';
     let query = mysql.pool.query(sql, (err, results) => {
@@ -24,9 +24,12 @@ supplierRouter
   .post((req, res, next) => {
     if (req.body['addSupplier']) {
       mysql.pool.query(
-        // add new supplier
+        // Post SQL INSERT query to add a new supplier
         'INSERT INTO `Suppliers` (`supplierName`, `supplierPlanet`) VALUES (?,?)',
-        [req.body.name, req.body.planet],
+        [
+          req.body.name, 
+          req.body.planet
+        ],
         (err) => {
           if (err) {
             next(err);

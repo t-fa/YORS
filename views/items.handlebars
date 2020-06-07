@@ -1,11 +1,11 @@
 <!-- Authors: Janet Anderson and Thomas Fattah -->
-<!-- Step: 6 Draft -->
-<!-- Date: May 31, 2020 -->
+<!-- Step: 7 (Final Portfolio)  -->
+<!-- Date: June 5, 2020 -->
 <!-- Course: CS 340 -->
 
 <title>Ye Olde Robot Shoppe Items</title>
 
-<!-- SQL INSERT query for the Items Entity-->
+<!-- Form for SQL INSERT query for the Items Entity (add a new item) -->
 <h1>Add an item:</h1>
 <section>
     <form method="post">
@@ -28,10 +28,10 @@
         </div>
         <div class="form-group row">
             <label class="col">Enter Ye Olde Price:
-                <input class="form-control" type="number" step="0.01" min=0 size="40" name="price" required>
+                <input class="form-control" type="number" step="0.01" min=0 max=999999.99 name="price" required>
             </label>
             <label class="col">Enter number in stock:
-                <input class="form-control" type="number" name="quantity" size="40" min="0" required>
+                <input class="form-control" type="number" name="quantity" min="0" required>
             </label>
         </div>
         <input type="submit" class="btn btn-primary" value="Add Item" name="addItem">
@@ -40,15 +40,19 @@
 
 <br>
 
-<!-- SQL SELECT query for the Items Entity to be displayed in a table 
-    with some supplier information -->
+<!-- Table that will display the results from a SQL SELECT query for the Items Entity.
+     (itemID, item description, supplier name & id, ye olde price, and quantity ) are 
+     gotten through a join with the Suppliers Entity.
+     SQL DELETE CRUD functionality will delete an item from the Items Entity.  
+     The edit button will send the user to the editItem page that will perform an SQL
+     UPDATE (or bring the user back to Items if they cancel). -->
 <h1>Current Items:</h1>
 <section>
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
                 <th>Item ID</th>
-                <th>Item</th>
+                <th>Item Description</th>
                 <th>Supplier Name (ID)</th>
                 <th>Ye Olde Price</th>
                 <th>Number In Stock</th>
@@ -65,15 +69,14 @@
                     {{#if this.supplierID}}
                     {{ this.supplierName }} ({{ this.supplierID }})
                     {{else}}NULL
-                    {{/if}}</td>
+                    {{/if}}
+                </td>
                 <td>{{ this.YeOldePrice }}</td>
                 <td>{{ this.currentQuantity }}</td>
-                <td><a href="/items/{{this.itemID}}"><input type=" button" class="btn btn-info" value="Edit"></a>
-                </td>
+                <td><a href="/items/{{this.itemID}}"><button class="btn btn-info">Edit</button></a></td>
                 <td><a href="/items/delete/{{this.itemID}}"><button class="btn btn-info">Delete</button></a></td>
             </tr>
             {{/each}}
-
         </tbody>
     </table>
 </section>

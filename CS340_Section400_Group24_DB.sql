@@ -1,12 +1,13 @@
 -- Authors: Janet Anderson and Thomas Fattah
--- Step: 4 Draft
--- Date: May 18, 2020
+-- Step: 7 (Final Portfolio)
+-- Date: June 5, 2020
 -- Course: CS 340
 -- Section: 400
 -- Group: 24
--- Database for Ye Olde Shoppe online store that buys 
--- and sells robot parts.
--- ------------------------------------------------------
+-- Database for Ye Olde Shoppe employee web pages to view customers, orders, items, purchases, suppliers
+-- and items in an order.  Employees can also add new entries for each entity, update item information, 
+-- search and filter customers, delete an item, and delete an item from an order. 
+-- -------------------------------------------------------------------------------------------------------
 
 -- a) Data Definition Queries
 
@@ -94,7 +95,7 @@ CREATE TABLE `OrderItem` (
 
 
 
--- ------------------------------------------------------
+-- -------------------------------------------------------------------------------------------------------
 
 -- b) Sample Data
 

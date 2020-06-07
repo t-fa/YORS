@@ -12,11 +12,11 @@ customerRouter
   .get((req, res, next) => {
     let context = {};
 
-    // display all customers
+    // Get SQL SELECT query to display all customers
     let sql =
       'SELECT `customerID`, `customerFirstName`, `customerLastName`, `customerPlanet` FROM `Customers`';
 
-    // filter customers by name or planet
+    // Get SQL SELECT query to filter customers by name or planet based on user selection
     if (req.query.filterFirstName && req.query.filterLastName) {
       sql +=
         " WHERE `customerFirstName` LIKE '%" +
@@ -43,7 +43,7 @@ customerRouter
       }
 
       context.customers = result;
-
+      // Get SQL SELECT query for populating dropdown menu with distinct planets for filter by planet
       let sql2 =
         'SELECT DISTINCT `customerPlanet` FROM `Customers` ORDER BY `customerPlanet` ASC';
       mysql.pool.query(sql2, (err, result) => {
@@ -60,7 +60,7 @@ customerRouter
   .post((req, res, next) => {
     if (req.body['addCustomer']) {
       mysql.pool.query(
-        // add new customer
+        // Post SQL INSERT query to add a new customer
         'INSERT INTO `Customers` (`customerFirstName`, `customerLastName`, `customerPlanet`) VALUES (?,?,?)',
         [
           req.body.customerFirstName,

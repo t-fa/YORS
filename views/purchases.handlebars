@@ -1,11 +1,11 @@
 <!-- Authors: Janet Anderson and Thomas Fattah -->
-<!-- Step: 6 Draft -->
-<!-- Date: May 31, 2020 -->
+<!-- Step: 7 (Final Portfolio)  -->
+<!-- Date: June 5, 2020 -->
 <!-- Course: CS 340 -->
 
 <title>Ye Olde Robot Shoppe Purchases</title>
 
-<!-- SQL INSERT query for the Purchases Entity-->
+<!-- Form for SQL INSERT query for the Purchases Entity (add a new purchase) -->
 <h1>Add a new purchase:</h1>
 <section>
     <form method="post">
@@ -19,7 +19,7 @@
                 </select>
             </label>
             <label class="col">Enter Date of Purchase:
-                <input class="form-control" type="date" name="purchaseDate" size="40" required />
+                <input class="form-control" type="date" name="purchaseDate" required />
             </label>
         </div>
         <input type="submit" class="btn btn-primary" value="Add Purchase" name="addPurchase" />
@@ -28,8 +28,8 @@
 
 <br>
 
-<!-- SQL SELECT query for the Purchases Entity to be dispalyed in a table
-    with some customer information -->
+<!--  Table that will display the results from a SQL SELECT query for the Purchases Entity.
+      The customer information (first name, last name) is gotten through a join with Customers. -->
 <h1>Current Purchases:</h1>
 <section>
     <table class="table table-striped">

@@ -1,11 +1,12 @@
 <!-- Authors: Janet Anderson and Thomas Fattah -->
-<!-- Step: 6 Draft -->
-<!-- Date: May 31, 2020 -->
+<!-- Step: 7 (Final Portfolio)  -->
+<!-- Date: June 5, 2020 -->
 <!-- Course: CS 340 -->
 
 <title>Ye Olde Robot Shoppe Orders</title>
 
-<!-- SQL INSERT query for the Orders Entity & M:M relationship for Orders and Items -->
+<!-- Form for SQL INSERT query for the Orders Entity & M:M relationship for Orders and Items
+     (add a new order and add a new item to an order) -->
 <h1>Add an order:</h1>
 <section>
     <form method="post">
@@ -45,10 +46,10 @@
         </div>
         <div class="form-group row">
             <label class="col"> Quantity:
-                <input class="form-control" type="number" name="quantity" size="40" min="1" value="1" required>
+                <input class="form-control" type="number" name="quantity" min="1" value="1" required>
             </label>
             <label class="col">Enter orderDate:
-                <input type="date" class="form-control" type="date" name="orderDate" size="60" required>
+                <input type="date" class="form-control" type="date" name="orderDate" required>
             </label>
         </div>
         <input type="submit" class="btn btn-primary" value="Add Order" name="addOrder">
@@ -56,8 +57,9 @@
 </section>
 
 <br>
+<br>
 
-<!-- SQL INSERT query for adding an item to an order -->
+<!-- Form for SQL INSERT query for adding an item to an order (M:M relationship) -->
 <h1>Add an item to an existing order:</h1>
 <section>
     <form method="post">
@@ -81,7 +83,7 @@
                 </select>
             </label>
             <label class="col">Enter quantity:
-                <input class="form-control" type="number" name="quantity" size="40" min="1" required>
+                <input class="form-control" type="number" name="quantity" min="1" required>
             </label>
         </div>
         <input type="submit" class="btn btn-primary" value="Add Item to Order" name="addItemToOrder">
@@ -89,10 +91,43 @@
 </section>
 
 <br>
+<br>
 
-<!-- SQL SELECT query for the Orders Entity to be displayed in a table with some 
-    customer information.  SQL Edit/Delete CRUD functionality included in the table.-->
+Note: If an item already exists in an order, the quantity will be updated with the additional user entered quantity.
+
+<br>
+<br>
+
+
 <h1>Current Orders and Items Ordered:</h1>
+<h3>Important note about the table below:</h3>
+<section>
+    The table is a combination of the Orders Entity and the OrderItem intersection table.  Here, the delete
+    button will correspond to removing an entry from the M:M relationship table (i.e. removing an item from an
+    order).   Therefore, it is possible for Item/Quantity to be NULL in the table. 
+    
+    <br>
+
+    While every order must have an item, it is possible to break this requirement.  When an item is deleted from 
+    the Items page, the DELETE will cascade to the M:M relationship table OrderItem.  If the order contains more 
+    than 1 item, then the row corresponding to order number and item number (of the removed item) is deleted and 
+    the other entries for that order will be displayed in the table. However, if the order only contains one 
+    item and that item is deleted, then the OrderItem entry is deleted, but the Order will still appear as the 
+    Order itself is not deleted when an item is deleted.  
+    
+    <br>
+    When this happens, the default behavior is for item description and quantity to be set NULL. 
+    Similarly, from this page, if an order only has one item, and the user selects the delete button corresponding
+    to that particular order, then the M:M relationship in the OrderItem table is deleted, but the order will 
+    still be shown in the table below.  As such, the delete option will not be available to entries where the 
+    item description is NULL since the delete functionality is to delete an item from an order without deleting 
+    the Order itself.
+</section>
+<br>
+<!-- Table that will display the results from a SQL SELECT query for Orders Entity and OrderItem intersection table 
+     (orderID, customer name (id), date of order, item name, quanity, galaticPay, order beamed) are gotten
+     through a join with Orders, Customers, and Items Entity and the OrderItem intersection table.
+     SQL DELETE CRUD functionality will delete an entry in the M:M relationship (OrderItem intersection table). -->
 <section>
     <table class="table table-striped">
         <thead class="thead-dark">
@@ -136,7 +171,7 @@
                     {{/if}}
                 </td>
                 <td>{{#if this.itemID}}
-                    <a href = '/orders/delete/{{this.orderID}}/{{this.itemID}}/'
+                    <a href = '/orders/delete/{{this.orderID}}/{{this.itemID}}/'>
                     <button class="btn btn-info" name="deleteOrderItem">Delete Item</button></a>
                     {{/if}}
                 </td>
@@ -144,14 +179,4 @@
             {{/each}}
         </tbody>
     </table>
-</section>
-
-<br>
-<h2>Note:</h2>
-<section>
-    It is possible for Item/Quantity to be NULL. While every order must have an item, when an item is deleted,
-    the database will delete every entry from the OrderItem M:M relationship table. If an order only contains
-    one item and that item is deleted, then the Order will still appear in the table above, but the Item and
-    Quantity fields will be NULL. The delete option will not be available to entries where there is no Item ID
-    since the delete functionality is to delete an item from an order without deleting the Order itself.
 </section>

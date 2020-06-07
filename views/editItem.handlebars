@@ -1,6 +1,6 @@
 <!-- Authors: Janet Anderson and Thomas Fattah -->
-<!-- Step: 6 Draft -->
-<!-- Date: May 31, 2020 -->
+<!-- Step: 7 (Final Portfolio)  -->
+<!-- Date: June 5, 2020 -->
 <!-- Course: CS 340 -->
 
 <title>Ye Olde Robot Shoppe Items</title>
@@ -9,14 +9,15 @@
 <h1>Edit An Item</h1>
 <br>
 
-<!-- This form will submit to the GET route update, and will display the current values,
-    allowing the user to pick what entries they'd like to update -->
+<!-- Form for SQL UPDATE query for the Items Entity (updating the current item selected)
+     This form will display the current information of the item and allow the user to pick 
+     what entries they'd like to update -->
 <form method="post">
     {{#item}}
     <fieldset>
         <div class="form-group row">
             <label class="col">Edit item description:
-                <input class="form-control" type="text" name="itemType" size="40" value="{{ itemType }}">
+                <input class="form-control" type="text" name="itemType" value="{{ itemType }}">
             </label>
             <label class="col">Edit supplier:
                 <select class="form-control" name="s_id">
@@ -36,11 +37,11 @@
         </div>
         <div class="form-group row">
             <label class="col">Edit Ye Olde Price:
-                <input required class="form-control" type="text" inputmode="numeric" step="0.01" min="0" size="40"
+                <input required class="form-control" type="number" inputmode="numeric" step="0.01" min=0 max=999999.99 
                     name="price" value={{ YeOldePrice }}>
             </label>
             <label class="col">Edit quantity:
-                <input class="form-control" type="number" name="quantity" size="40" min="0" value={{ currentQuantity }}
+                <input class="form-control" type="number" name="quantity" min="0" value={{ currentQuantity }}
                     required>
             </label>
         </div>

@@ -13,11 +13,12 @@ purchaseRouter
   .get((req, res, next) => {
     let context = {};
 
-    // SELECT query for displaying all data in table
+    /* Get SELECT query for displaying all data in table (purchaseID, purchaseData, customerID, customer name)
+      throught a join with Customers */
     let sql =
-      'SELECT `purchaseID`, `purchaseDate`, `Purchases`.`customerID` AS "customerID",\
-       `Customers`.`customerFirstName` AS "customerFirstName", `Customers`.`customerLastName` AS "customerLastName"\
-        FROM `Purchases` LEFT JOIN `Customers` ON `Purchases`.`customerID`=`Customers`.`customerID`';
+      'SELECT `purchaseID`, `purchaseDate`, `Purchases`.`customerID` AS "customerID",' +
+      ' `Customers`.`customerFirstName` AS "customerFirstName", `Customers`.`customerLastName` AS "customerLastName"' +
+      ' FROM `Purchases` LEFT JOIN `Customers` ON `Purchases`.`customerID`=`Customers`.`customerID`';
     let query = mysql.pool.query(sql, (err, results) => {
       if (err) {
         next(err);
@@ -26,7 +27,7 @@ purchaseRouter
 
       context.purchases = results;
 
-      // populates dropdown menu with customers for adding a new purchase
+      // Get SELECT query for populating dropdown menu with customers for adding a new purchase
       let sql2 =
         'SELECT `customerID`, `customerFirstName`, `customerLastName` FROM `Customers` ORDER BY `customerID` ASC';
       mysql.pool.query(sql2, (err, results) => {
@@ -43,9 +44,12 @@ purchaseRouter
   .post((req, res, next) => {
     if (req.body['addPurchase']) {
       mysql.pool.query(
-        // add new purchase
+        // Post SQL INSERT query to add a new purchase
         'INSERT INTO `Purchases` (`purchaseDate`, `customerID`) VALUES (?,?)',
-        [req.body.purchaseDate, req.body.customerID],
+        [
+          req.body.purchaseDate, 
+          req.body.customerID
+        ],
         (err) => {
           if (err) {
             next(err);
