@@ -12,13 +12,13 @@ The database was designed using an entity-relationship diagram as well as a sche
 As can be seen in the above diagrams, several different types of tables and relationships are present. 
 
 ## 1:Many Relationships:
--Customers:Orders
--Customers:Purchases
--Suppliers:Items
+- Customers:Orders
+- Customers:Purchases
+- Suppliers:Items
 
 ## Many:Many Relationships:
--Items:Purchases
--Orders:Items
+- Items:Purchases
+- Orders:Items
 
 In the final version of the project, the Items:Purchases M:M relationship was not implemented. However, the Orders:Items relationship was implemented with an OrdemItem table. The OrderItem table can be viewed on the "Items" page in table.
 
