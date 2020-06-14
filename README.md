@@ -5,7 +5,7 @@ Ye Olde Robot Shoppe simulates a robot parts store with a SQL database consistin
 
 The database was designed using an entity-relationship diagram as well as a schema.
 
-![ERD](ERD.png)
+![ERD](images/ERD.png)
 
 ![Schema](images/schema.png)
 
