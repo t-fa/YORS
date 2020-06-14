@@ -5,7 +5,7 @@ Ye Olde Robot Shoppe simulates a robot parts store with a SQL database consistin
 
 The database was designed using an entity-relationship diagram as well as a schema.
 
-![ERD](erd.png)
+![ERD](ERD.png)
 
 ![Schema](images/schema.png)
 
@@ -25,7 +25,7 @@ In the final version of the project, the Items:Purchases M:M relationship was no
 The project was built with Node.js, Express, MySQL, Handlebars, and Bootstrap. While the page is no longer being hosted, below are screenshots of how the project was implemented:
 
 Home Page:
-![Home Page](images/home page.png)
+![Home Page](images/homepage.png)
 
 Customers Page:
 ![Customers](images/customers.png)
